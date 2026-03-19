@@ -131,9 +131,9 @@ def build_audit_sections(
     for rule_id, count in top_rules:
         sev = severity_by_rule.get(rule_id)
         if sev:
-            lines.append(f"- `{rule_id}`: {count} (severidad principal: {sev})")
+            lines.append(f"- **{rule_id}**: {count} (severidad principal: {sev})")
         else:
-            lines.append(f"- `{rule_id}`: {count}")
+            lines.append(f"- **{rule_id}**: {count}")
 
     lines.append("")
     lines.append("## Impacto por regla de calidad")
@@ -145,10 +145,26 @@ def build_audit_sections(
         column = getattr(issue, "column", None)
         column_txt = str(column) if column else "-"
         sev = severity_by_rule.get(rule_id, "-")
-        lines.append(f"| `{rule_id}` | {table} | {column_txt} | {_action(rule_id)} | {sev} | {count} |")
+        display_rule_id = rule_id.replace("_", " ")
+        lines.append(f"| **{display_rule_id}** | {table} | {column_txt} | {_action(rule_id)} | {sev} | {count} |")
 
     lines.append("")
     lines.append("## Evidencias (ejemplos controlados)")
+    
+    _explanations = {
+        "R_ORPHAN_CITA": "Registro rechazado íntegramente por romper integridad referencial (el paciente referenciado no existe en la dimensión de pacientes).",
+        "R_DUP_PK_CONFLICT": "Rechazado porque existen múltiples registros con la misma llave primaria pero datos contradictorios.",
+        "R_COST_NON_NUMERIC": "Rechazado por inviabilidad financiera (costo '{original_value}' no es analizable cuantitativamente).",
+        "R_COST_NEGATIVE": "Rechazado por costo numérico negativo o inválido ({original_value}).",
+        "R_DUP_PK_EXACT": "Fila descartada por ser 100% idéntica a otra ocurrencia. Se conservó la primera para no duplicar volumetría.",
+        "R_EDAD_FILLED_FROM_DERIVADA": "El paciente no tenía registrada la edad, pero sí se conocía el dato original: {original_value}. Se calculó e imputó a {clean_value} comparando la fecha de nacimiento contra la fecha de referencia.",
+        "R_EDAD_INCONSISTENT_WITH_DERIVED": "La dupla capturada de edad y nacimiento ({original_value}) se contradice matemáticamente. Se prefirió corregir la edad a {clean_value} respetando la fecha de nacimiento como fuente de la verdad.",
+        "R_EDAD_PROVIDED_OUT_OF_RANGE": "La edad excedía límites lógicos de vida humana en este contexto (recibido {original_value}); se nulificó su valor.",
+        "R_FECHA_NAC_INVALID": "La fecha provista ('{original_value}') tiene un formato de texto irreconocible o contiene un día/mes matemáticamente imposible en el calendario. Fue nulificada.",
+        "R_EMAIL_INVALID": "El valor ingresado ('{original_value}') no cumplió con la estructura regex requerida por un correo electrónico válido; fue nulificado.",
+        "R_TELEFONO_INVALID_LENGTH": "La longitud de los dígitos limpios extraídos de '{original_value}' no es válida; fue nulificado.",
+    }
+
     for rule_id in list(evidence_by_rule.keys()):
         issue = evidence_by_rule[rule_id]
         table = getattr(issue, "table", "?")
@@ -157,10 +173,21 @@ def build_audit_sections(
         original_value = getattr(issue, "original_value", None)
         clean_value = getattr(issue, "clean_value", None)
         column_txt = f" (columna `{column}`)" if column else ""
+        display_rule_id = rule_id.replace("_", " ")
         lines.append(
-            f"- `{rule_id}` -> {table}{column_txt} (row_id={row_id}): "
+            f"- **{display_rule_id}** -> {table}{column_txt} (row_id={row_id}): "
             f"original={truncate(original_value)}, limpio={truncate(clean_value)}"
         )
+        base_explain = _explanations.get(rule_id, "Aplicación estándar de regla de perfilamiento.")
+        try:
+            explain_txt = base_explain.format(
+                original_value=truncate(original_value),
+                clean_value=truncate(clean_value)
+            )
+        except KeyError:
+            explain_txt = base_explain
+            
+        lines.append(f"  - _Justificación:_ {explain_txt}")
 
     return lines
 

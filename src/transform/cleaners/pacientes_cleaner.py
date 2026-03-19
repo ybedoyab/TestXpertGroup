@@ -122,6 +122,8 @@ def clean_pacientes(
     mask_need_derive = dfw["edad"].isna() & dfw["edad_derivada"].notna()
     dfw.loc[mask_need_derive, "edad"] = dfw.loc[mask_need_derive, "edad_derivada"]
     for idx in dfw.index[mask_need_derive].tolist():
+        orig_age = dfw.at[idx, "edad_original"]
+        fnac = dfw.at[idx, "fecha_nacimiento"]
         add_issue(
             issues,
             table=table_name,
@@ -129,7 +131,7 @@ def clean_pacientes(
             rule_id="R_EDAD_FILLED_FROM_DERIVADA",
             severity="info",
             column="edad",
-            original_value=dfw.at[idx, "edad_original"],
+            original_value=f"{orig_age} (nació: {fnac})",
             clean_value=dfw.at[idx, "edad"],
             detail=f"Se completó edad usando edad derivada (tolerancia=±{age_tol}).",
         )
@@ -140,6 +142,8 @@ def clean_pacientes(
     dfw.loc[mask_diff, "edad"] = dfw.loc[mask_diff, "edad_derivada"]
     dfw.loc[mask_diff, "edad_inconsistente"] = True
     for idx in dfw.index[mask_diff].tolist():
+        orig_age = dfw.at[idx, "edad_original"]
+        fnac = dfw.at[idx, "fecha_nacimiento"]
         add_issue(
             issues,
             table=table_name,
@@ -147,7 +151,7 @@ def clean_pacientes(
             rule_id="R_EDAD_INCONSISTENT_WITH_DERIVED",
             severity="warning",
             column="edad",
-            original_value=dfw.at[idx, "edad_original"],
+            original_value=f"{orig_age} (nació: {fnac})",
             clean_value=dfw.at[idx, "edad"],
             detail=f"Inconsistencia entre edad provista y derivada > {age_tol} años.",
         )
