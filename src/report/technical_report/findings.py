@@ -10,32 +10,34 @@ def build_findings_and_rules_sections(*, profiling_before: dict[str, Any]) -> li
     citas_before_prof = profiling_before.get("citas_medicas", {})
 
     lines: list[str] = []
-    lines.append("## Hallazgos principales de calidad y recuperabilidad detectada")
-    lines.append("### Tabla `pacientes`")
-    lines.append(f"- Filas: {pacientes_before_prof.get('row_count')}")
-    if "missing_counts" in pacientes_before_prof:
-        lines.append("- Nulos (top):")
-        miss = sorted(pacientes_before_prof["missing_counts"].items(), key=lambda x: x[1], reverse=True)[:5]
-        for c, n in miss:
-            lines.append(f"  - `{c}`: {n}")
-    if "format_anomalies" in pacientes_before_prof:
-        lines.append("- Formatos anómalos:")
-        for k, v in pacientes_before_prof["format_anomalies"].items():
-            lines.append(f"  - `{k}`: {v}")
-    lines.append("")
+    lines.append('<pdf:nextpage />')
+    lines.append('<div style="page-break-inside: avoid; margin-bottom: 10px;">')
+    lines.append('<h2 style="color: #2980B9; font-size: 15px; margin-top: 15px; border-bottom: 1px solid #BDC3C7; padding-bottom: 3px;">Hallazgos principales de calidad y recuperabilidad detectada</h2>')
+    def _build_html_list(title: str, prof_dict: dict[str, Any]) -> str:
+        out = [f"<h3>Tabla <code>{title}</code></h3>", f"&bull; <b>Filas:</b> {prof_dict.get('row_count')}<br>"]
+        if "missing_counts" in prof_dict:
+            out.append("&bull; <b>Nulos (top):</b><br>")
+            miss = sorted(prof_dict["missing_counts"].items(), key=lambda x: x[1], reverse=True)[:5]
+            for c, n in miss:
+                out.append(f"&nbsp;&nbsp;&bull; <code>{c}</code>: {n}<br>")
+        if "format_anomalies" in prof_dict:
+            out.append("&bull; <b>Formatos anómalos:</b><br>")
+            for k, v in prof_dict["format_anomalies"].items():
+                out.append(f"&nbsp;&nbsp;&bull; <code>{k}</code>: {v}<br>")
+        return "".join(out)
 
-    lines.append("### Tabla `citas_medicas`")
-    lines.append(f"- Filas: {citas_before_prof.get('row_count')}")
-    if "missing_counts" in citas_before_prof:
-        lines.append("- Nulos (top):")
-        miss = sorted(citas_before_prof["missing_counts"].items(), key=lambda x: x[1], reverse=True)[:5]
-        for c, n in miss:
-            lines.append(f"  - `{c}`: {n}")
-    if "format_anomalies" in citas_before_prof:
-        lines.append("- Formatos anómalos:")
-        for k, v in citas_before_prof["format_anomalies"].items():
-            lines.append(f"  - `{k}`: {v}")
-    lines.append("")
+    lines.append('<table style="width: 100%; border: none; table-layout: fixed;">')
+    lines.append('<tr>')
+    
+    p_html = _build_html_list("pacientes", pacientes_before_prof)
+    c_html = _build_html_list("citas_medicas", citas_before_prof)
+    
+    lines.append(f'<td style="width: 50%; vertical-align: top; border: none; padding-right: 10px; line-height: 1.2;">\n{p_html}\n</td>')
+    lines.append(f'<td style="width: 50%; vertical-align: top; border: none; padding-left: 10px; line-height: 1.2;">\n{c_html}\n</td>')
+    
+    lines.append('</tr>')
+    lines.append('</table>')
+    lines.append('</div>')
 
     lines.append("## Reglas de validación implementadas")
     lines.append("- Sexo: normalización a catálogo `{M,F}`; valores no mapeables se dejan `NULL` y se registran.")

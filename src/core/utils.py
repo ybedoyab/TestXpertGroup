@@ -13,6 +13,19 @@ logger = logging.getLogger(__name__)
 
 _EMAIL_RE = re.compile(r"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$", re.IGNORECASE)
 
+_MESES_ES_MAP = {
+    "ene": 1, "enero": 1, "feb": 2, "febrero": 2, "mar": 3, "marzo": 3,
+    "abr": 4, "abril": 4, "may": 5, "mayo": 5, "jun": 6, "junio": 6,
+    "jul": 7, "julio": 7, "ago": 8, "agosto": 8, "sep": 9, "septiembre": 9,
+    "set": 9, "setiembre": 9, "oct": 10, "octubre": 10, "nov": 11,
+    "noviembre": 11, "dic": 12, "diciembre": 12
+}
+
+_SPANISH_DATE_RE = re.compile(
+    r"^(\d{1,2})[\s\-\/]*(?:de\s*)?([a-z]{3,10})[\s\-\/]*(?:de\s*)?(\d{4})$",
+    re.IGNORECASE
+)
+
 
 def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
@@ -62,6 +75,19 @@ def parse_date_str(value: str | None) -> date | None:
         return datetime.strptime(v, "%Y-%m-%d").date()
     except ValueError:
         pass
+
+    m_es = _SPANISH_DATE_RE.match(v)
+    if m_es:
+        day_str, month_str, year_str = m_es.groups()
+        month_num = _MESES_ES_MAP.get(month_str.lower())
+        if month_num:
+            try:
+                y = int(year_str)
+                d = int(day_str)
+                if 1900 <= y <= 2100:
+                    return date(y, month_num, d)
+            except ValueError:
+                pass
 
     parts = v.split("-")
     if len(parts) == 3:

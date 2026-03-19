@@ -48,6 +48,14 @@ def test_parse_date_recovery_swapped_dd_mm() -> None:
     assert parse_date_str("2023-19-01").isoformat() == "2023-01-19"
 
 
+def test_parse_date_spanish_textual() -> None:
+    assert parse_date_str("02 de nov de 1977").isoformat() == "1977-11-02"
+    assert parse_date_str("2 nov 1977").isoformat() == "1977-11-02"
+    assert parse_date_str("02/nov/1977").isoformat() == "1977-11-02"
+    assert parse_date_str("15 de enero de 2000").isoformat() == "2000-01-15"
+    assert parse_date_str("32 de nov de 1977") is None
+
+
 def test_parse_date_standard_format() -> None:
     assert parse_date_str("2000-01-15").isoformat() == "2000-01-15"
 

@@ -1,7 +1,7 @@
 # Informe Técnico - Calidad de Datos Hospitalarios
 
 ## Resumen ejecutivo
-- Completitud global (pct no nulos): 82.77% -> 84.26% (delta +1.49 pp).
+- Completitud global (pct no nulos): 82.77% -> 84.27% (delta +1.50 pp).
 - Integridad referencial FK (pct válido entre no-nulos): 98.09% -> 100.00%.
 - Rechazos: pacientes=0 / citas=190.
 
@@ -23,39 +23,20 @@ El dataset contiene al menos dos tablas: `pacientes` y `citas_medicas`. Las llav
 5. Métricas de calidad antes y después y resumen ejecutable.
 6. Bonus: simulación de carga a un modelo tipo Data Warehouse (SQLite).
 
-## Hallazgos principales de calidad y recuperabilidad detectada
-### Tabla `pacientes`
-- Filas: 5010
-- Nulos (top):
-  - `email`: 2506
-  - `telefono`: 1668
-  - `edad`: 1647
-  - `sexo`: 1023
-  - `ciudad`: 827
-- Formatos anómalos:
-  - `fecha_nacimiento_invalid_raw`: 4
-  - `fecha_nacimiento_recovered_by_swap`: 0
-  - `fecha_nacimiento_final_null`: 4
-  - `sexo_invalid`: 0
-  - `email_invalid`: 0
-  - `telefono_invalid`: 0
-
-### Tabla `citas_medicas`
-- Filas: 9961
-- Nulos (top):
-  - `fecha_cita`: 3278
-  - `estado_cita`: 2542
-  - `medico`: 2033
-  - `costo`: 1724
-  - `especialidad`: 1673
-- Formatos anómalos:
-  - `fecha_cita_invalid_raw`: 3314
-  - `fecha_cita_recovered_by_swap`: 3314
-  - `fecha_cita_final_null`: 0
-  - `estado_cita_invalid`: 0
-  - `costo_non_numeric`: 0
-  - `costo_negative`: 0
-
+<pdf:nextpage />
+<div style="page-break-inside: avoid; margin-bottom: 10px;">
+<h2 style="color: #2980B9; font-size: 15px; margin-top: 15px; border-bottom: 1px solid #BDC3C7; padding-bottom: 3px;">Hallazgos principales de calidad y recuperabilidad detectada</h2>
+<table style="width: 100%; border: none; table-layout: fixed;">
+<tr>
+<td style="width: 50%; vertical-align: top; border: none; padding-right: 10px; line-height: 1.2;">
+<h3>Tabla <code>pacientes</code></h3>&bull; <b>Filas:</b> 5010<br>&bull; <b>Nulos (top):</b><br>&nbsp;&nbsp;&bull; <code>email</code>: 2506<br>&nbsp;&nbsp;&bull; <code>telefono</code>: 1668<br>&nbsp;&nbsp;&bull; <code>edad</code>: 1647<br>&nbsp;&nbsp;&bull; <code>sexo</code>: 1023<br>&nbsp;&nbsp;&bull; <code>ciudad</code>: 827<br>&bull; <b>Formatos anómalos:</b><br>&nbsp;&nbsp;&bull; <code>fecha_nacimiento_invalid_raw</code>: 4<br>&nbsp;&nbsp;&bull; <code>fecha_nacimiento_recovered_by_swap</code>: 3<br>&nbsp;&nbsp;&bull; <code>fecha_nacimiento_final_null</code>: 1<br>&nbsp;&nbsp;&bull; <code>sexo_invalid</code>: 0<br>&nbsp;&nbsp;&bull; <code>email_invalid</code>: 0<br>&nbsp;&nbsp;&bull; <code>telefono_invalid</code>: 0<br>
+</td>
+<td style="width: 50%; vertical-align: top; border: none; padding-left: 10px; line-height: 1.2;">
+<h3>Tabla <code>citas_medicas</code></h3>&bull; <b>Filas:</b> 9961<br>&bull; <b>Nulos (top):</b><br>&nbsp;&nbsp;&bull; <code>fecha_cita</code>: 3278<br>&nbsp;&nbsp;&bull; <code>estado_cita</code>: 2542<br>&nbsp;&nbsp;&bull; <code>medico</code>: 2033<br>&nbsp;&nbsp;&bull; <code>costo</code>: 1724<br>&nbsp;&nbsp;&bull; <code>especialidad</code>: 1673<br>&bull; <b>Formatos anómalos:</b><br>&nbsp;&nbsp;&bull; <code>fecha_cita_invalid_raw</code>: 3314<br>&nbsp;&nbsp;&bull; <code>fecha_cita_recovered_by_swap</code>: 3314<br>&nbsp;&nbsp;&bull; <code>fecha_cita_final_null</code>: 0<br>&nbsp;&nbsp;&bull; <code>estado_cita_invalid</code>: 0<br>&nbsp;&nbsp;&bull; <code>costo_non_numeric</code>: 0<br>&nbsp;&nbsp;&bull; <code>costo_negative</code>: 0<br>
+</td>
+</tr>
+</table>
+</div>
 ## Reglas de validación implementadas
 - Sexo: normalización a catálogo `{M,F}`; valores no mapeables se dejan `NULL` y se registran.
 - Estado de cita: normalización a `{Completada, Cancelada, Reprogramada}`; no mapeables -> `NULL`.
@@ -77,14 +58,14 @@ La limpieza evita inferencias clínicas/dudosas: no se infiere sexo desde el nom
 
 
 ## Métricas de calidad (antes y después)
-- Completitud global (pct de celdas no nulas): 82.77% -> 84.26%
+- Completitud global (pct de celdas no nulas): 82.77% -> 84.27%
 - Integridad referencial FK valid (pct entre no-nulos): 98.09% -> 100.00%
 
 ### Cambios de completitud (campos clave)
 - `pacientes.email`: 49.98% -> 49.94% (delta -0.04 pp)
 - `pacientes.telefono`: 66.71% -> 66.72% (delta +0.01 pp)
 - `pacientes.sexo`: 79.58% -> 79.56% (delta -0.02 pp)
-- `pacientes.fecha_nacimiento`: 100.00% -> 99.92% (delta -0.08 pp)
+- `pacientes.fecha_nacimiento`: 100.00% -> 99.98% (delta -0.02 pp)
 - `citas_medicas.estado_cita`: 74.48% -> 74.54% (delta +0.06 pp)
 - `citas_medicas.fecha_cita`: 67.09% -> 67.02% (delta -0.07 pp)
 - `citas_medicas.costo`: 82.69% -> 82.67% (delta -0.02 pp)
@@ -101,27 +82,32 @@ La limpieza evita inferencias clínicas/dudosas: no se infiere sexo desde el nom
 - citas_medicas_rejected_rows: 190
 
 ### Top reglas por número de eventos de auditoría
-- `R_EDAD_FILLED_FROM_DERIVADA`: 1645 (severidad principal: info)
-- `R_EDAD_INCONSISTENT_WITH_DERIVED`: 1613 (severidad principal: warning)
-- `R_ORPHAN_CITA`: 190 (severidad principal: error)
-- `R_DUP_PK_EXACT`: 10 (severidad principal: info)
-- `R_FECHA_NAC_INVALID`: 4 (severidad principal: warning)
+- **R_EDAD_FILLED_FROM_DERIVADA**: 1647 (severidad principal: info)
+- **R_EDAD_INCONSISTENT_WITH_DERIVED**: 1614 (severidad principal: warning)
+- **R_ORPHAN_CITA**: 190 (severidad principal: error)
+- **R_DUP_PK_EXACT**: 10 (severidad principal: info)
+- **R_FECHA_NAC_INVALID**: 1 (severidad principal: warning)
 
 ## Impacto por regla de calidad
 | Regla | Tabla | Campo | Acción | Severidad | Registros |
 |---|---|---|---|---|---|
-| `R_EDAD_FILLED_FROM_DERIVADA` | pacientes | edad | Corrección automática: rellenar edad | info | 1645 |
-| `R_EDAD_INCONSISTENT_WITH_DERIVED` | pacientes | edad | Corrección automática: ajustar edad a derivada | warning | 1613 |
-| `R_ORPHAN_CITA` | citas_medicas | id_paciente | Rechazo por FK huérfana | error | 190 |
-| `R_DUP_PK_EXACT` | pacientes | id_paciente | Deduplicación exacta (keep first) | info | 10 |
-| `R_FECHA_NAC_INVALID` | pacientes | fecha_nacimiento | Nulificación: fecha no parseable | warning | 4 |
+| **R EDAD FILLED FROM DERIVADA** | pacientes | edad | Corrección automática: rellenar edad | info | 1647 |
+| **R EDAD INCONSISTENT WITH DERIVED** | pacientes | edad | Corrección automática: ajustar edad a derivada | warning | 1614 |
+| **R ORPHAN CITA** | citas_medicas | id_paciente | Rechazo por FK huérfana | error | 190 |
+| **R DUP PK EXACT** | pacientes | id_paciente | Deduplicación exacta (keep first) | info | 10 |
+| **R FECHA NAC INVALID** | pacientes | fecha_nacimiento | Nulificación: fecha no parseable | warning | 1 |
 
 ## Evidencias (ejemplos controlados)
-- `R_FECHA_NAC_INVALID` -> pacientes (columna `fecha_nacimiento`) (row_id=56): original=02 de nov de 1977, limpio=NULL
-- `R_EDAD_FILLED_FROM_DERIVADA` -> pacientes (columna `edad`) (row_id=0): original=nan, limpio=72.0
-- `R_EDAD_INCONSISTENT_WITH_DERIVED` -> pacientes (columna `edad`) (row_id=1): original=58.0, limpio=61.0
-- `R_DUP_PK_EXACT` -> pacientes (columna `id_paciente`) (row_id=5000): original=500, limpio=NULL
-- `R_ORPHAN_CITA` -> citas_medicas (columna `id_paciente`) (row_id=183): original=6416, limpio=NULL
+- **R FECHA NAC INVALID** -> pacientes (columna `fecha_nacimiento`) (row_id=84): original=1959-06-33, limpio=NULL
+  - _Justificación:_ La fecha provista ('1959-06-33') tiene un formato de texto irreconocible o contiene un día/mes matemáticamente imposible en el calendario. Fue nulificada.
+- **R EDAD FILLED FROM DERIVADA** -> pacientes (columna `edad`) (row_id=0): original=nan (nació: 1954-01-08), limpio=72.0
+  - _Justificación:_ El paciente no tenía registrada la edad, pero sí se conocía el dato original: nan (nació: 1954-01-08). Se calculó e imputó a 72.0 comparando la fecha de nacimiento contra la fecha de referencia.
+- **R EDAD INCONSISTENT WITH DERIVED** -> pacientes (columna `edad`) (row_id=1): original=58.0 (nació: 1965-01-01), limpio=61.0
+  - _Justificación:_ La dupla capturada de edad y nacimiento (58.0 (nació: 1965-01-01)) se contradice matemáticamente. Se prefirió corregir la edad a 61.0 respetando la fecha de nacimiento como fuente de la verdad.
+- **R DUP PK EXACT** -> pacientes (columna `id_paciente`) (row_id=5000): original=500, limpio=NULL
+  - _Justificación:_ Fila descartada por ser 100% idéntica a otra ocurrencia. Se conservó la primera para no duplicar volumetría.
+- **R ORPHAN CITA** -> citas_medicas (columna `id_paciente`) (row_id=183): original=6416, limpio=NULL
+  - _Justificación:_ Registro rechazado íntegramente por romper integridad referencial (el paciente referenciado no existe en la dimensión de pacientes).
 
 ## Consideraciones de gobierno de datos
 - Clasificación por severidad: `info` (observación/cambio no destructivo), `warning` (nulificación/normalización), `error` (rechazo por inviabilidad).

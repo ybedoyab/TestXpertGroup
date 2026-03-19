@@ -182,4 +182,10 @@ def run_pipeline(
         quality_summary=quality_summary,
     )
 
+    logger.info("================ ENTREGABLES GENERADOS ================")
+    logger.info("Informe Técnico PDF : %s", base_output_dir / "docs" / "technical_report.pdf")
+    logger.info("Pacientes Limpios   : %s", base_output_dir / "data" / "processed" / "pacientes_clean.csv")
+    logger.info("Citas Limpias       : %s", base_output_dir / "data" / "processed" / "citas_medicas_clean.csv")
+    logger.info("Data Warehouse (DB) : %s", base_output_dir / "data" / "reports" / "dwh.sqlite")
+    logger.info("=======================================================")
     logger.info("Pipeline completado exitosamente.")
