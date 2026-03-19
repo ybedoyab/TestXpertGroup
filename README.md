@@ -1,85 +1,75 @@
-# Hospital Data Quality Pipeline (Ingeniero de Datos)
+# Hospital Data Quality Pipeline
 
-Proyecto de calidad de datos para el dataset `dataset_hospital 2.json`, con foco en:
-trazabilidad (auditoría por regla y fila), limpieza conservadora, validaciones cruzadas,
-métricas antes/después y entregables listos para enviar.
+Pipeline de calidad de datos para el procesamiento del archivo `dataset_hospital 2.json`. El proyecto incluye trazabilidad mediante auditoría por regla y fila, limpieza de datos, validaciones cruzadas y generación de métricas.
 
 ## Índice
-1. [Qué contiene](#que-contiene)
-2. [Estructura del proyecto](#estructura-del-proyecto)
+
+1. [Características](#caracteristicas)
+2. [Estructura del Proyecto](#estructura-del-proyecto)
 3. [Requisitos](#requisitos)
-4. [Preparación del dataset](#preparacion-dataset)
-5. [Ejecución paso a paso](#ejecucion-paso-a-paso)
-6. [Ejecutar pruebas](#ejecutar-pruebas)
-7. [Archivos generados (outputs)](#archivos-generados)
-8. [Bonus: DWH y PDF](#bonus-dwh-y-pdf)
-9. [Compresión para entrega](#compresion-zip)
-10. [Decisiones de diseño](#decisiones-de-diseno)
-11. [Limitaciones y supuestos](#limitaciones-y-supuestos)
+4. [Preparación de Datos](#preparacion-de-datos)
+5. [Ejecución del Pipeline](#ejecucion-del-pipeline)
+6. [Pruebas Automatizadas](#pruebas-automatizadas)
+7. [Archivos de Salida](#archivos-de-salida)
+8. [Data Warehouse y Reportes](#data-warehouse-y-reportes)
+9. [Empaquetado](#empaquetado)
+10. [Decisiones de Arquitectura](#decisiones-de-arquitectura)
+11. [Restricciones y Supuestos](#restricciones-y-supuestos)
 
-<a id="que-contiene"></a>
-## Qué contiene
+## Características
 
-El dataset incluye al menos dos tablas:
-`pacientes` y `citas_medicas`.
+El pipeline ejecuta las siguientes operaciones:
 
-El pipeline ejecuta:
-1. Ingesta determinista (JSON -> `pandas.DataFrame`).
-2. Profiling exploratorio antes de limpieza.
-3. Limpieza conservadora con auditoría (banderas, issues y rechazados).
+1. Ingesta determinista (JSON a `pandas.DataFrame`).
+2. Perfilado (profiling) exploratorio previo a la limpieza.
+3. Limpieza de datos con registro de auditoría (identificación de anomalías y rechazos).
 4. Validaciones cruzadas (integridad referencial y catálogos).
-5. Métricas globales y por tabla (antes vs después).
-6. Export de datasets limpios/rechazados y reporte de calidad.
-7. Bonus: simulación de migración a un modelo tipo Data Warehouse (SQLite).
-8. Bonus: suite de pruebas con `pytest` y cobertura de código (`pytest-cov`).
+5. Cálculo de métricas de calidad globales y por entidad (pre y post procesamiento).
+6. Exportación de datasets (limpios y rechazados) y reportes de calidad.
+7. Simulación de carga hacia un modelo Data Warehouse (SQLite).
+8. Ejecución de pruebas automatizadas mediante `pytest` con reporte de cobertura.
 
-<a id="estructura-del-proyecto"></a>
-## Estructura del proyecto
+## Estructura del Proyecto
 
-- `main.py`: entrypoint CLI que ejecuta el pipeline completo.
-- `config/`: configuración del pipeline.
-  - `config.py`: defaults de CLI (paths, fecha, límites).
-  - `settings.py`: settings de runtime (tolerancias, validaciones).
-- `src/`: implementación del ETL por capas.
-  - `src/core/`: tipos compartidos (`IssueRecord`, catálogos), utilidades (fechas, email, teléfono) y logging.
-  - `src/extract/`: extracción (carga del JSON de entrada a `pandas.DataFrame`).
-  - `src/transform/`: transformaciones y reglas:
-    - `profiling_impl.py`: profiling antes de limpieza.
-    - `cleaners/`: limpieza conservadora + auditoría por fila/campo.
-    - `validation_impl.py`: validaciones cruzadas y orfandades.
-    - `metrics/`: métricas antes/después y flatten para exports.
-  - `src/load/`: carga a artefactos de salida:
-    - `export_impl.py`: exports CSV/JSON.
-    - `dwh/`: simulación de DWH (SQLite star schema).
-  - `src/pipeline/`: orquestador de punta a punta (`pipeline_runner.py`).
-  - `src/report/`: generador del informe técnico (`technical_report/`).
-- `tests/`: pruebas (36 tests, ~91% cobertura) con `conftest.py` y fixtures compartidos.
-- `data/processed/`: datasets limpios y rechazados generados (ignorados en git).
-- `data/reports/`: métricas, resumen y SQLite DWH generado (ignorados en git).
-- `docs/technical_report.md`: informe técnico generado a partir de los resultados reales.
+- `main.py`: Punto de entrada CLI para la ejecución del pipeline.
+- `config/`: Configuración general.
+  - `config.py`: Valores predeterminados del CLI (rutas, fechas, límites).
+  - `settings.py`: Parámetros de ejecución (tolerancias, reglas de validación).
+- `src/`: Implementación del ETL.
+  - `src/core/`: Tipos compartidos (`IssueRecord`, catálogos), utilidades de transformación y configuración de logs.
+  - `src/extract/`: Módulo de ingesta de datos JSON.
+  - `src/transform/`: Módulos de transformación y reglas de negocio.
+    - `profiling_impl.py`: Perfilado de datos.
+    - `cleaners/`: Lógica de limpieza y auditoría a nivel de registro.
+    - `validation_impl.py`: Validaciones de integridad referencial.
+    - `metrics/`: Cálculo de métricas de calidad.
+  - `src/load/`: Módulos de exportación.
+    - `export_impl.py`: Generación de archivos CSV/JSON.
+    - `dwh/`: Carga a modelo relacional (SQLite).
+  - `src/pipeline/`: Orquestador principal (`pipeline_runner.py`).
+  - `src/report/`: Generador del informe técnico.
+- `tests/`: Suite de pruebas unitarias y de integración.
+- `data/processed/`: Directorio de salida para datasets procesados (ignorado en control de versiones).
+- `data/reports/`: Directorio de salida para métricas, resúmenes y base de datos SQLite (ignorado en control de versiones).
+- `docs/technical_report.md`: Informe técnico generado automáticamente.
 
-<a id="requisitos"></a>
 ## Requisitos
 
-- Python `3.11+`
-- Se recomienda usar `venv` (incluido en este repo vía `.venv/` cuando lo creas localmente).
-- Dependencias definidas en `pyproject.toml` (fuente de verdad única).
+- Python 3.11 o superior.
+- Entorno virtual (`venv`).
+- Dependencias gestionadas mediante `pyproject.toml`.
 
-<a id="preparacion-dataset"></a>
-## Preparación del dataset (`data/raw`)
+## Preparación de Datos
 
-El pipeline espera el dataset en:
+El archivo JSON de entrada debe ubicarse en la siguiente ruta antes de iniciar la ejecución:
 
-- `data/raw/dataset_hospital 2.json`
+`data/raw/dataset_hospital 2.json`
 
-Si el archivo no está ahí, muévelo antes de ejecutar.
+## Ejecución del Pipeline
 
-## Ejecución paso a paso
+Todos los comandos deben ejecutarse desde el directorio raíz del repositorio.
 
-Abre PowerShell en la raíz del repo (donde está `README.md`), para que las rutas relativas funcionen tal como están en los comandos.
-
-<a id="ejecucion-paso-a-paso"></a>
-### 1) Crear entorno virtual e instalar dependencias
+### 1. Configuración del Entorno Virtual
 
 ```powershell
 python -m venv .venv
@@ -87,26 +77,19 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install -e ".[dev]"
 ```
 
-### 2) Ejecutar el pipeline completo
+### 2. Ejecución Principal
 
-Esto generará: exports limpios/rechazados, métricas antes/después, resumen, DWH (SQLite) y el informe técnico.
+El siguiente comando procesa el dataset completo y genera todos los artefactos de salida (exportaciones, métricas, base de datos DWH e informe técnico).
 
 ```powershell
 .venv\Scripts\python.exe main.py
 ```
 
-Notas:
-- Por defecto el pipeline usa (configurable vía flags):
-  - `--input "data/raw/dataset_hospital 2.json"`
-  - `--output-dir "."`
-  - `--reference-date "2026-03-18"`
-  - `--limit 0`
-  - `--age-tolerance-years 2`
-- El pipeline es idempotente: sobrescribe exports y recrea métricas en las rutas estándar para que puedas re-ejecutar sin romper nada.
+El pipeline es idempotente; ejecuciones sucesivas sobrescribirán los archivos de salida existentes.
 
-### Parámetros opcionales (si necesitas cambiar defaults)
+### Parámetros de Ejecución
 
-Ejemplos:
+El punto de entrada `main.py` admite parámetros opcionales para modificar el comportamiento estándar:
 
 ```powershell
 .venv\Scripts\python.exe main.py --limit 500
@@ -114,20 +97,26 @@ Ejemplos:
 .venv\Scripts\python.exe main.py --input "data/raw/otro_dataset.json"
 ```
 
-<a id="ejecutar-pruebas"></a>
-### 3) Ejecutar pruebas (recomendado antes de enviar)
+Valores predeterminados:
+- `--input`: `data/raw/dataset_hospital 2.json`
+- `--output-dir`: `.`
+- `--reference-date`: `2026-03-18`
+- `--limit`: `0` (procesamiento completo sin límite)
+- `--age-tolerance-years`: `2`
+
+## Pruebas Automatizadas
+
+Comando para ejecutar la suite de pruebas validando la cobertura del código:
 
 ```powershell
 .venv\Scripts\python.exe -m pytest -v
 ```
 
-La configuración de cobertura ya está en `pyproject.toml`; el comando anterior
-reportará automáticamente la cobertura de `src/` y `config/`.
+La configuración de métricas de cobertura se encuentra definida en `pyproject.toml`.
 
-<a id="archivos-generados"></a>
-## Archivos generados (outputs)
+## Archivos de Salida
 
-Mínimo requerido por la prueba:
+La ejecución exitosa del pipeline generará los siguientes archivos:
 
 - `data/processed/pacientes_clean.csv`
 - `data/processed/citas_medicas_clean.csv`
@@ -138,51 +127,44 @@ Mínimo requerido por la prueba:
 - `data/reports/after_quality_metrics.csv`
 - `data/reports/quality_summary.json`
 
-> **Nota**: los archivos generados están en `.gitignore` porque son 100% reproducibles ejecutando `main.py`.
+## Data Warehouse y Reportes
 
-<a id="bonus-dwh-y-pdf"></a>
-## Bonus: DWH (SQLite) y PDF del informe
+### Data Warehouse (SQLite)
 
-### DWH (SQLite)
-
-El pipeline carga automáticamente los datos limpios en:
+Los datos procesados son cargados automáticamente mediante un esquema estrella en:
 
 - `data/reports/dwh.sqlite`
 
-### PDF (opcional)
+### Informe Técnico
 
-El informe en Markdown se genera en `docs/technical_report.md`.
+El informe detallado de calidad de datos se genera en formato Markdown:
 
-Si tienes `pandoc`, puedes generar el PDF así:
+- `docs/technical_report.md`
+
+Generación de formato PDF (requiere `pandoc`):
 
 ```powershell
 pandoc .\docs\technical_report.md -o .\docs\technical_report.pdf
 ```
 
-<a id="decisiones-de-diseno"></a>
-## Decisiones de diseño (por qué así)
+## Decisiones de Arquitectura
 
-- **Limpieza conservadora**: no se corrigen valores "clínicamente dudosos" sin base. Se normaliza a catálogos
-  (por ejemplo `sexo`, `estado_cita`), se parsean fechas de forma estricta (`YYYY-MM-DD`) y lo no parseable
-  se deja como `NULL` con auditoría.
-- **Trazabilidad**: cada corrección/rechazo queda registrada como `IssueRecord` (regla, severidad, fila y valores).
-- **Reproducibilidad**: la edad derivada usa una `REFERENCE_DATE` fija vía CLI.
-- **Idempotencia**: el pipeline sobrescribe exports y recrea `dwh.sqlite` en cada corrida.
-- **Sin wrappers innecesarios**: cada módulo contiene lógica real; no hay capas de indirección triviales.
-- **Logging estructurado**: cada etapa del pipeline emite logs con conteos (filas procesadas, rechazadas, issues).
-- **Configuración única**: `pyproject.toml` es la fuente de verdad para dependencias (no hay `requirements.txt` duplicado).
+- **Limpieza Conservadora**: Los valores inválidos son normalizados mediante catálogos restringidos. Valores no interpretables se procesan como nulos (`NULL`) y se registran en la pista de auditoría.
+- **Trazabilidad Continua**: Modificaciones o rechazos son categorizados mediante la estructura `IssueRecord`, indicando regla aplicada, severidad y valor original.
+- **Variables Deterministas**: Cálculos dependientes del tiempo, como la edad derivada, operan sobre la base de una fecha de referencia estática (`REFERENCE_DATE`).
+- **Idempotencia Transaccional**: Toda ejecución regenera los artefactos analíticos de salida y bases de datos destino para asegurar reproducibilidad.
+- **Manejo de Nulos en Dimensiones**: En el modelo dimensional, los registros `NULL` son mapeados al identificador `UNKNOWN` (clave = 0).
 
-<a id="limitaciones-y-supuestos"></a>
-## Limitaciones y supuestos
+## Restricciones y Supuestos
 
-- Fechas: se parsean de forma conservadora esperando `YYYY-MM-DD`. Formatos mixtos no estándar se marcan y quedan como `NULL`.
-- Telefonía: se normaliza a dígitos-only y se valida longitud razonable (10 a 15 dígitos).
-- Emails: validación por regex (no se hace verificación de existencia de dominio).
-- Integridad referencial: las filas huérfanas de `citas_medicas` se rechazan (no se inventan pacientes).
-- Para el DWH: `NULL` se mapea a un miembro `UNKNOWN` (key=0) en las `dim_*`.
+- Procesamiento de fechas: El sistema requiere el formato ISO (`YYYY-MM-DD`). Estructuras incompatibles resultan en asignación nula documentada.
+- Procesamiento telefónico: Exclusivamente caracteres numéricos validando longitud entre 10 y 15 dígitos.
+- Correos electrónicos: Validados mediante coincidencia de estructura de expresión regular.
+- Integridad Referencial: Filas en la entidad de citas médicas sin correspondencia de paciente se clasifican como registros rechazados.
 
-<a id="compresion-zip"></a>
-## Cómo comprimir para entregar (ZIP)
+## Empaquetado
+
+Comando para comprimir el proyecto y generar un archivo `.zip`:
 
 ```powershell
 Compress-Archive -Path * -DestinationPath deliverable_hospital_dq.zip -Force
