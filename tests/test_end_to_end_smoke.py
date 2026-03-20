@@ -88,6 +88,43 @@ def test_end_to_end_quality_summary_content(
     assert "issue_stats" in summary
 
 
+def test_end_to_end_clean_csv_no_audit_columns(
+    tmp_path: Path, minimal_dataset: dict[str, Any]
+) -> None:
+    """Verifica que los CSVs limpios no exponen columnas internas de auditoría."""
+    input_path = tmp_path / "dataset_hospital 2.json"
+    input_path.write_text(json.dumps(minimal_dataset), encoding="utf-8")
+
+    run_pipeline(
+        input_path=input_path,
+        base_output_dir=tmp_path,
+        reference_date=date(2026, 3, 18),
+        limit=0,
+    )
+
+    audit_columns = {
+        "source_row_id", "sexo_original", "fecha_nacimiento_original",
+        "edad_original", "edad_limpia", "email_original", "telefono_original",
+        "fecha_cita_original", "estado_cita_original", "costo_original",
+    }
+
+    pac_path = tmp_path / "data" / "processed" / "pacientes_clean.csv"
+    with open(pac_path, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        pac_headers = set(reader.fieldnames or [])
+    assert not pac_headers & audit_columns, (
+        f"pacientes_clean.csv contiene columnas de auditoría: {pac_headers & audit_columns}"
+    )
+
+    citas_path = tmp_path / "data" / "processed" / "citas_medicas_clean.csv"
+    with open(citas_path, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        citas_headers = set(reader.fieldnames or [])
+    assert not citas_headers & audit_columns, (
+        f"citas_medicas_clean.csv contiene columnas de auditoría: {citas_headers & audit_columns}"
+    )
+
+
 def test_end_to_end_idempotent(tmp_path: Path, minimal_dataset: dict[str, Any]) -> None:
     """Verifica que ejecutar el pipeline dos veces es idempotente."""
     input_path = tmp_path / "dataset_hospital 2.json"

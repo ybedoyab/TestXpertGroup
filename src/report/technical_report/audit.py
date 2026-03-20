@@ -105,6 +105,8 @@ def build_audit_sections(
             return "Nulificación: email inválido"
         if rule_id == "R_TELEFONO_INVALID_LENGTH":
             return "Nulificación: teléfono fuera de rango"
+        if rule_id == "R_FECHA_CITA_FUTURE":
+            return "Advertencia: fecha cita futura (registro conservado)"
         return "Evento de auditoría"
 
     lines: list[str] = []
@@ -163,6 +165,8 @@ def build_audit_sections(
         "R_FECHA_NAC_INVALID": "La fecha provista ('{original_value}') tiene un formato de texto irreconocible o contiene un día/mes matemáticamente imposible en el calendario. Fue nulificada.",
         "R_EMAIL_INVALID": "El valor ingresado ('{original_value}') no cumplió con la estructura regex requerida por un correo electrónico válido; fue nulificado.",
         "R_TELEFONO_INVALID_LENGTH": "La longitud de los dígitos limpios extraídos de '{original_value}' no es válida; fue nulificado.",
+        "R_FECHA_CITA_FUTURE": "La fecha de cita '{original_value}' es posterior a la fecha de referencia del pipeline. "
+        "El registro se conserva (puede corresponder a una cita programada), pero queda marcado para revisión del equipo clínico.",
     }
 
     for rule_id in list(evidence_by_rule.keys()):
@@ -179,14 +183,10 @@ def build_audit_sections(
             f"original={truncate(original_value)}, limpio={truncate(clean_value)}"
         )
         base_explain = _explanations.get(rule_id, "Aplicación estándar de regla de perfilamiento.")
-        try:
-            explain_txt = base_explain.format(
-                original_value=truncate(original_value),
-                clean_value=truncate(clean_value)
-            )
-        except KeyError:
-            explain_txt = base_explain
-            
+        explain_txt = base_explain.format(
+            original_value=truncate(original_value),
+            clean_value=truncate(clean_value),
+        )
         lines.append(f"  - _Justificación:_ {explain_txt}")
 
     return lines

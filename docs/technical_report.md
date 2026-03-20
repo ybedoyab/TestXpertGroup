@@ -45,6 +45,7 @@ El dataset contiene al menos dos tablas: `pacientes` y `citas_medicas`. Las llav
 - Teléfonos: normalización a dígitos y validación de longitud razonable; fuera de rango -> `NULL`.
 - Edad: cálculo derivado desde `fecha_nacimiento` usando `REFERENCE_DATE`; se corrige `edad` solo si está `NULL` o difiere por más de la tolerancia configurada (±2 años).
 - Costo: debe ser numérico y no negativo; no numérico/negativo -> registro rechazado.
+- Fecha de cita futura: se emite `warning` si `fecha_cita > REFERENCE_DATE`. El registro se conserva (puede ser cita programada); la decisión final se delega al data owner.
 - Integridad referencial: citas sin `id_paciente` existente -> registro rechazado.
 
 ## Estrategia de limpieza aplicada

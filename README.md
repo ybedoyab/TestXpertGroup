@@ -155,9 +155,40 @@ pandoc .\docs\technical_report.md -o .\docs\technical_report.pdf
 - **Idempotencia Transaccional**: Toda ejecución regenera los artefactos analíticos de salida y bases de datos destino para asegurar reproducibilidad.
 - **Manejo de Nulos en Dimensiones**: En el modelo dimensional, los registros `NULL` son mapeados al identificador `UNKNOWN` (clave = 0).
 
+## Reglas de calidad implementadas
+
+| Rule ID | Tabla | Severidad | Acción |
+|---|---|---|---|
+| `R_SEXO_UNRECOGNIZED` | pacientes | warning | Nulifica `sexo` si no mapea al catálogo `{M, F}` |
+| `R_FECHA_NAC_INVALID` | pacientes | warning | Nulifica `fecha_nacimiento` si no es parseable |
+| `R_EDAD_FILLED_FROM_DERIVADA` | pacientes | info | Imputa `edad` desde `fecha_nacimiento` cuando está ausente |
+| `R_EDAD_INCONSISTENT_WITH_DERIVED` | pacientes | warning | Corrige `edad` cuando difiere > tolerancia de la derivada |
+| `R_EDAD_PROVIDED_OUT_OF_RANGE` | pacientes | warning | Nulifica `edad` fuera del rango `[0, 120]` |
+| `R_EMAIL_INVALID` | pacientes | warning | Nulifica email que no cumple formato RFC |
+| `R_TELEFONO_INVALID_LENGTH` | pacientes | warning | Nulifica teléfono con longitud fuera de `[10, 15]` dígitos |
+| `R_PK_MISSING` | ambas | error | Rechaza registros sin llave primaria |
+| `R_DUP_PK_EXACT` | ambas | info | Deduplica exactos conservando la primera ocurrencia |
+| `R_DUP_PK_CONFLICT` | ambas | error | Rechaza PKs duplicadas con datos contradictorios |
+| `R_ESTADO_CITA_UNRECOGNIZED` | citas_medicas | warning | Nulifica `estado_cita` si no mapea al catálogo |
+| `R_FECHA_CITA_INVALID` | citas_medicas | warning | Nulifica `fecha_cita` no parseable |
+| `R_FECHA_CITA_FUTURE` | citas_medicas | warning | Alerta si `fecha_cita` es posterior a la fecha de referencia; el registro se conserva |
+| `R_COST_NON_NUMERIC` | citas_medicas | error | Rechaza registro con costo no numérico |
+| `R_COST_NEGATIVE` | citas_medicas | error | Rechaza registro con costo negativo |
+| `R_ORPHAN_CITA` | citas_medicas | error | Rechaza citas cuyo `id_paciente` no existe en pacientes |
+
+## Schema de salida
+
+Los archivos `*_clean.csv` contienen únicamente el **schema canónico** — sin columnas internas de auditoría (`*_original`, `source_row_id`, etc.). Dichas columnas se publican exclusivamente en `data_quality_issues.csv` para trazabilidad.
+
+**pacientes_clean.csv**: `id_paciente`, `nombre`, `fecha_nacimiento`, `edad`, `edad_derivada`, `edad_inconsistente`, `sexo`, `email`, `telefono`, `ciudad`
+
+**citas_medicas_clean.csv**: `id_cita`, `id_paciente`, `fecha_cita`, `especialidad`, `medico`, `costo`, `estado_cita`
+
 ## Restricciones y Supuestos
 
 - Procesamiento de fechas: El sistema requiere el formato ISO (`YYYY-MM-DD`). Estructuras incompatibles resultan en asignación nula documentada.
 - Procesamiento telefónico: Exclusivamente caracteres numéricos validando longitud entre 10 y 15 dígitos.
 - Correos electrónicos: Validados mediante coincidencia de estructura de expresión regular.
 - Integridad Referencial: Filas en la entidad de citas médicas sin correspondencia de paciente se clasifican como registros rechazados.
+- Fechas futuras en citas: Se conservan con alerta (`R_FECHA_CITA_FUTURE`) ya que pueden corresponder a citas programadas. La decisión final de rechazo se delega al data owner.
+- **Cuando `rejected_rows = 0`:** No indica un pipeline pasivo. Significa que el dataset no presentaba problemas estructurales (FKs huérfanas, costos inválidos, PKs conflictivas). La limpieza actuó sobre campos de valor mediante correcciones in-place, documentadas en `data_quality_issues.csv`.

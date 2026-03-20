@@ -319,6 +319,56 @@ def test_clean_citas_missing_pk_rejected(reference_date: date, settings: Setting
     assert any(i.rule_id == "R_PK_MISSING" for i in issues)
 
 
+def test_clean_citas_future_date_flagged_but_kept(reference_date: date, settings: Settings) -> None:
+    """Una cita con fecha futura se conserva pero genera un issue R_FECHA_CITA_FUTURE."""
+    future_date = date(reference_date.year + 1, 1, 1).isoformat()
+    df = pd.DataFrame(
+        [
+            {
+                "id_cita": "uuid-1",
+                "id_paciente": 1,
+                "fecha_cita": future_date,
+                "especialidad": "Cardiología",
+                "medico": "Dr. X",
+                "costo": 100,
+                "estado_cita": "Completada",
+            },
+        ]
+    )
+    df = df.reset_index(drop=False).rename(columns={"index": "source_row_id"})
+    clean_citas, rejected_citas, issues = clean_citas_medicas(
+        df, reference_date=reference_date, settings=settings
+    )
+    assert len(clean_citas) == 1, "El registro no debe rechazarse por fecha futura"
+    assert len(rejected_citas) == 0
+    assert any(i.rule_id == "R_FECHA_CITA_FUTURE" for i in issues)
+    future_issues = [i for i in issues if i.rule_id == "R_FECHA_CITA_FUTURE"]
+    assert future_issues[0].severity == "warning"
+
+
+def test_clean_citas_past_date_no_future_flag(reference_date: date, settings: Settings) -> None:
+    """Una cita con fecha en el pasado no genera R_FECHA_CITA_FUTURE."""
+    df = pd.DataFrame(
+        [
+            {
+                "id_cita": "uuid-1",
+                "id_paciente": 1,
+                "fecha_cita": "2020-01-15",
+                "especialidad": "Cardiología",
+                "medico": "Dr. X",
+                "costo": 100,
+                "estado_cita": "Completada",
+            },
+        ]
+    )
+    df = df.reset_index(drop=False).rename(columns={"index": "source_row_id"})
+    clean_citas, rejected_citas, issues = clean_citas_medicas(
+        df, reference_date=reference_date, settings=settings
+    )
+    assert len(clean_citas) == 1
+    assert not any(i.rule_id == "R_FECHA_CITA_FUTURE" for i in issues)
+
+
 def test_clean_citas_invalid_estado_becomes_null(reference_date: date, settings: Settings) -> None:
     df = pd.DataFrame(
         [

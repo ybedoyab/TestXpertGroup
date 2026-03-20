@@ -6,8 +6,6 @@ import logging
 from datetime import date
 from typing import Any
 
-logger = logging.getLogger(__name__)
-
 import pandas as pd
 
 from config.settings import Settings
@@ -16,6 +14,8 @@ from src.core.catalog_normalizers import normalize_estado_cita
 from src.core.cleaning_pk import resolve_pk_duplicates
 from src.core.schemas import IssueRecord, pk_column_citas
 from src.core.utils import parse_date_str, try_cast_float
+
+logger = logging.getLogger(__name__)
 
 
 def _norm_optional_text(v: Any) -> str | None:
@@ -84,6 +84,21 @@ def clean_citas_medicas(
             detail="Fecha de cita no parseable (esperado YYYY-MM-DD).",
         )
     dfw_valid_pk["fecha_cita"] = parsed.apply(lambda d: d.isoformat() if d is not None else None)
+
+    mask_future = parsed.apply(lambda d: d is not None and d > reference_date)
+    for idx in dfw_valid_pk.index[mask_future].tolist():
+        add_issue(
+            issues,
+            table=table_name,
+            row_id=dfw_valid_pk.at[idx, "source_row_id"],
+            rule_id="R_FECHA_CITA_FUTURE",
+            severity="warning",
+            column="fecha_cita",
+            original_value=dfw_valid_pk.at[idx, "fecha_cita_original"],
+            clean_value=dfw_valid_pk.at[idx, "fecha_cita"],
+            detail=f"Fecha de cita posterior a la fecha de referencia ({reference_date}). "
+            "El registro se conserva (puede ser cita programada), pero queda marcado para revisión.",
+        )
 
     if "estado_cita" in dfw_valid_pk.columns:
         dfw_valid_pk["estado_cita_original"] = dfw_valid_pk["estado_cita"]

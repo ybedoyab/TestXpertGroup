@@ -119,3 +119,37 @@ def pk_column_pacientes() -> str:
 def pk_column_citas() -> str:
     return "id_cita"
 
+
+def export_columns_pacientes() -> list[str]:
+    """Columnas canónicas del CSV limpio de pacientes.
+
+    Incluye los campos originales más los derivados de calidad relevantes para
+    el consumidor final. Las columnas de auditoría interna (`*_original`,
+    `source_row_id`, `edad_limpia`) se publican únicamente en `data_quality_issues.csv`.
+    """
+    return [
+        "id_paciente",
+        "nombre",
+        "fecha_nacimiento",
+        "edad",
+        "edad_derivada",
+        "edad_inconsistente",
+        "sexo",
+        "email",
+        "telefono",
+        "ciudad",
+    ]
+
+
+def export_columns_citas_medicas() -> list[str]:
+    """Columnas canónicas del CSV limpio de citas médicas."""
+    return [
+        "id_cita",
+        "id_paciente",
+        "fecha_cita",
+        "especialidad",
+        "medico",
+        "costo",
+        "estado_cita",
+    ]
+

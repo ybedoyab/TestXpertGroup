@@ -55,6 +55,10 @@ def build_findings_and_rules_sections(*, profiling_before: dict[str, Any]) -> li
         "o difiere por más de la tolerancia configurada (±2 años)."
     )
     lines.append("- Costo: debe ser numérico y no negativo; no numérico/negativo -> registro rechazado.")
+    lines.append(
+        "- Fecha de cita futura: se emite `warning` si `fecha_cita > REFERENCE_DATE`. "
+        "El registro se conserva (puede ser cita programada); la decisión final se delega al data owner."
+    )
     lines.append("- Integridad referencial: citas sin `id_paciente` existente -> registro rechazado.")
     lines.append("")
 
