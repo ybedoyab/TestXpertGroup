@@ -1,0 +1,58 @@
+{
+  "global_before": {
+    "row_count_total": 14971,
+    "completeness_global_pct": 0.8276885808737148,
+    "referential_integrity_fk_valid_pct_among_non_null": 0.9809256098785263
+  },
+  "global_after": {
+    "row_count_total": 14771,
+    "completeness_global_pct": 0.8426524719318801,
+    "referential_integrity_fk_valid_pct_among_non_null": 1.0
+  },
+  "improvement": {
+    "completeness_global_delta": 0.014963891058165313,
+    "referential_integrity_fk_valid_delta": 0.019074390121473717
+  },
+  "rejected_counts": {
+    "pacientes_rejected_rows": 0,
+    "citas_medicas_rejected_rows": 190
+  },
+  "issue_stats": {
+    "total_issues": 3462,
+    "by_severity": {
+      "warning": 1615,
+      "info": 1657,
+      "error": 190
+    },
+    "by_rule_id": {
+      "R_FECHA_NAC_INVALID": 1,
+      "R_EDAD_FILLED_FROM_DERIVADA": 1647,
+      "R_EDAD_INCONSISTENT_WITH_DERIVED": 1614,
+      "R_DUP_PK_EXACT": 10,
+      "R_ORPHAN_CITA": 190
+    },
+    "severity_by_rule": {
+      "R_FECHA_NAC_INVALID": "warning",
+      "R_EDAD_FILLED_FROM_DERIVADA": "info",
+      "R_EDAD_INCONSISTENT_WITH_DERIVED": "warning",
+      "R_DUP_PK_EXACT": "info",
+      "R_ORPHAN_CITA": "error"
+    }
+  },
+  "counts": {
+    "before_pacientes_rows": 5010,
+    "after_pacientes_rows": 5000,
+    "before_citas_rows": 9961,
+    "after_citas_rows": 9771
+  },
+  "dwh": {
+    "db_path": "data/reports/dwh.sqlite",
+    "counts": {
+      "dim_paciente_rows": 5000,
+      "dim_medico_rows": 5,
+      "dim_especialidad_rows": 6,
+      "dim_fecha_rows": 1307,
+      "fact_citas_rows": 9771
+    }
+  }
+}

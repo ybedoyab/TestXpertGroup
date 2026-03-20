@@ -1,0 +1,191 @@
+source_row_id,id_cita,id_paciente,fecha_cita,especialidad,medico,costo,estado_cita,fecha_cita_original,estado_cita_original,costo_original,rejection_reason,rejection_rule_id
+183,ff335846-cf4a-427c-a598-4d0c49019fcf,6416,,Ginecología,Dra. Lina Torres,,,,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+232,9ceaa50a-16dd-431e-8345-c5e4a32e7c6d,6148,,,Dra. Lina Torres,,Cancelada,,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+279,86fbd10f-c3ef-490c-a4f7-0ab55e4745fe,6141,2022-12-08,,Dr. Juan Valdez,220.0,Reprogramada,2022-12-08,Reprogramada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+297,6f46ce42-8e1f-4ed8-b80a-cdb1f238a715,6095,,Neurología,Dr. Camilo Rojas,220.0,Cancelada,,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+338,3f08c4ff-37c8-41e1-bea8-1e59172f0b6a,6000,2025-04-06,Ortopedia,Dr. Camilo Rojas,120.0,Reprogramada,2025-04-06,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+356,64bdd3cd-8a7b-48cc-8123-227f3ed4d23e,6327,2023-11-29,Pediatría,Dra. Lina Torres,220.0,Cancelada,2023-11-29,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+546,e6111e33-36b3-4065-92f1-68068598a3be,6157,2025-07-30,Ginecología,Dra. Lina Torres,220.0,,2025-07-30,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+821,2933d6a4-e3b8-46dd-a3b8-85a2164adf32,6065,,Pediatría,,200.0,Reprogramada,,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+928,de2dcdd7-50ad-4494-8772-34d91110b10a,6037,,Neurología,Dr. Camilo Rojas,180.0,,,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+967,b9c18dc9-51ce-45e2-b502-71fca15cf122,6477,2023-01-14,Pediatría,Dr. Juan Valdez,200.0,Completada,2023-14-01,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+986,901987fc-1563-469f-9aac-38333201b551,6186,2023-11-12,Cardiología,Dra. Lina Torres,100.0,,2023-11-12,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+987,9bd60575-0ebc-465f-b34b-c57243b4d63d,6368,,Ortopedia,Dr. Juan Valdez,180.0,Reprogramada,,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1045,76aa3982-875b-4004-aba2-1297186fa4bc,6030,,Neurología,,120.0,,,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1196,61280b56-9d30-46ec-9a56-5cd13af3097f,6911,2024-06-07,Ortopedia,Dr. Juan Valdez,120.0,,2024-06-07,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1212,397ffd62-f407-4217-93b1-5dcab7293c93,6277,2024-10-04,Cardiología,Dr. Camilo Rojas,180.0,,2024-10-04,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1251,cc5d4d91-8843-4773-a0d5-069ac187aed6,6473,2022-02-24,,Dr. Camilo Rojas,100.0,Cancelada,2022-02-24,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1328,a588d034-d26b-4d0e-b8cb-9e5abec69d6d,6434,2023-11-13,Neurología,Dr. Juan Valdez,,Cancelada,2023-11-13,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1363,852ac72d-0b5a-4f52-8792-8fcb47c49e7b,6731,2023-01-14,Pediatría,Dra. Lina Torres,180.0,Reprogramada,2023-14-01,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1404,85f79ce2-3944-4185-9ee4-cbe7307b118d,6543,2023-04-22,Neurología,Dr. Camilo Rojas,100.0,,2023-04-22,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1416,48a5a011-075b-47ca-827e-1be26b3460fa,6848,,Neurología,Dr. Juan Valdez,200.0,Cancelada,,Cancelada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1417,a479d3c9-e0d2-4f05-9084-ed44e5c095bf,6936,2023-03-16,Pediatría,,200.0,Completada,2023-03-16,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1501,a797a242-e8fd-435d-a347-b0f2d5a86321,6974,2023-01-16,Ortopedia,,,,2023-16-01,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1584,549db67f-ce1e-4eea-9a5a-32ce556e0f58,6608,2024-08-07,Cardiología,,220.0,Completada,2024-08-07,Completada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1630,eb835a30-cf4c-4139-91c3-12a27c872d67,6676,2023-01-20,Cardiología,Dra. Lina Torres,180.0,Reprogramada,2023-20-01,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1714,84d72a23-c4df-4943-87fe-554cc5160170,6880,2022-03-21,Pediatría,,180.0,Reprogramada,2022-03-21,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1758,fa0116cf-6e0a-4270-8041-2618d1bb524d,6690,2023-01-14,Ginecología,Dr. Juan Valdez,220.0,,2023-14-01,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1834,707c9b66-e749-4f80-9d97-afe5434d052a,6897,2023-10-05,Neurología,Dra. Lina Torres,200.0,Reprogramada,2023-10-05,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1876,73e36b71-1df5-4209-a6bd-b9e9be3fa192,6381,2024-05-31,Pediatría,Dr. Juan Valdez,100.0,Completada,2024-05-31,Completada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1904,00c78844-db8c-4558-94fb-afae12aeaa2b,6024,,Ginecología,Dra. Lina Torres,120.0,,,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1923,1dcdc345-a9d4-4c6b-b7e7-8aca1f9dc204,6324,,Pediatría,Dr. Juan Valdez,200.0,Completada,,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+1985,a0c8e109-f413-4430-8c45-a72691aa546f,6544,2024-01-26,Ortopedia,Dra. Lina Torres,,,2024-01-26,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2162,af4b8683-5d4b-454e-b48e-2f402d3a0039,6454,2023-01-18,,Dr. Camilo Rojas,100.0,Cancelada,2023-18-01,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2197,71df1713-24f1-4b7d-af71-a57c370a870f,6473,2024-02-22,Ortopedia,,100.0,Reprogramada,2024-02-22,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2217,f4886583-5ed4-4ac2-9387-d66857ac336e,6592,2023-01-14,Ortopedia,Dr. Juan Valdez,180.0,Reprogramada,2023-14-01,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2240,871d2c84-eda3-4794-a939-bdb9ab09b2a4,6198,2023-10-29,Ginecología,Dr. Juan Valdez,,,2023-10-29,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2272,0058979d-e21e-4e82-93fd-35d22a2f9476,6249,2023-07-04,Ortopedia,Dr. Juan Valdez,100.0,Reprogramada,2023-07-04,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2299,803b6247-6f17-4b1c-838b-7da54876ffd0,6542,2024-02-01,Ginecología,,200.0,,2024-02-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2338,64cd283c-ec0a-43b8-8212-c2b8004c239e,6370,,Ginecología,Dra. Lina Torres,100.0,Reprogramada,,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2396,2da2cd51-1266-44ba-a884-7f9259477540,6742,2023-01-17,Neurología,Dr. Camilo Rojas,100.0,Completada,2023-17-01,Completada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2449,21ff6f76-18a3-4c0a-9e01-2bff31e8488b,6827,2022-12-02,Ortopedia,Dr. Camilo Rojas,,Cancelada,2022-12-02,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2579,0964dba2-e9f4-49fa-83a5-65bdc3f5b8fa,6546,2023-10-13,Neurología,,180.0,Completada,2023-10-13,Completada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2601,f582d7a2-0829-49be-945c-bdd6edca6801,6118,,Neurología,Dr. Andrés Murcia,220.0,,,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2650,a989037a-1f1d-4f7e-b374-67f7a8705a16,6786,2022-07-25,Pediatría,Dr. Camilo Rojas,,Completada,2022-07-25,Completada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2692,d47d003c-fe7c-461b-abef-19bcbe4fa5bc,6377,,Cardiología,Dr. Camilo Rojas,100.0,Reprogramada,,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2695,8065581a-8962-4f07-9f46-0ff0b7d9100f,6175,2024-11-03,Ginecología,Dr. Camilo Rojas,180.0,Cancelada,2024-11-03,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2747,613491f0-5c69-44b6-86a1-f2c7f9c6f750,6948,2025-03-07,Ginecología,Dr. Juan Valdez,,Completada,2025-03-07,Completada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2779,e858f704-1f92-4332-8a1f-5394703d2261,6489,2022-02-03,,Dra. Lina Torres,200.0,,2022-02-03,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2807,b7524450-062e-4048-bd87-d2350cc55793,6452,,Cardiología,,220.0,Cancelada,,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2912,3f3c4def-54d8-4a8c-ad5e-a46135f9670d,6150,2024-03-22,Pediatría,Dr. Andrés Murcia,100.0,Reprogramada,2024-03-22,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2964,df49dd40-af56-4b56-a1e6-607a8ebb1607,6994,,Neurología,Dra. Lina Torres,,,,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2969,48ecc7e4-8cb2-45ab-9149-e1567a082b01,6469,2023-01-20,,,120.0,Reprogramada,2023-20-01,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2975,f6ffab24-5f9b-488e-83f2-c0498c2dc0f6,6736,2023-01-17,,Dr. Juan Valdez,180.0,Cancelada,2023-17-01,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+2981,a0259668-759d-475a-be7c-1b145d4e8d61,6822,,Ortopedia,Dra. Lina Torres,120.0,Reprogramada,,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3002,ef8e1b02-81e8-4753-812b-c28760af705a,6630,2023-01-16,Pediatría,Dra. Lina Torres,180.0,Reprogramada,2023-16-01,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3026,541384a0-64a3-414d-baf2-3569781e6fc8,6159,2023-01-14,Pediatría,Dr. Andrés Murcia,180.0,Reprogramada,2023-14-01,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3080,6933d9a2-dc42-4e1c-9420-ae41c298bca6,6439,,Ortopedia,Dr. Andrés Murcia,120.0,Completada,,Completada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3082,6fe033a2-d0d6-49f2-b2da-3e632ea8d69c,6373,2023-01-14,Neurología,Dra. Lina Torres,,,2023-14-01,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3171,4ae5f817-7379-41bd-a519-1ba56d2773e5,6904,2025-07-09,Pediatría,,200.0,Completada,2025-07-09,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3172,4ab6739d-b5f3-454c-9532-424f2afa0242,6091,2023-07-27,Cardiología,Dr. Camilo Rojas,100.0,Reprogramada,2023-07-27,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3194,5a96a636-6600-41e2-9e44-039cef1acc59,6169,,Ortopedia,Dr. Camilo Rojas,,,,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3206,329eec36-aa49-4085-bad9-a4a943fb2e6a,6714,,Pediatría,Dr. Camilo Rojas,120.0,Completada,,Completada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3228,d39bb532-2391-4e87-98e0-f5206e98edb7,6331,2023-01-13,Ginecología,Dr. Andrés Murcia,120.0,Completada,2023-13-01,Completada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3245,dfb515e8-4c22-48a9-be28-95634aa7a503,6164,2023-01-15,Ginecología,Dr. Camilo Rojas,100.0,,2023-15-01,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3304,3f48c951-0b9c-4169-9ec3-eb4840c62832,6790,2024-03-09,Cardiología,Dr. Juan Valdez,180.0,,2024-03-09,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3390,1cc2e441-9f9f-41a7-b6b4-6d38e3a86411,6369,,,Dr. Andrés Murcia,200.0,Cancelada,,Cancelada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3421,a4e106a6-0eb1-44e9-8be9-7df4a059ee52,6851,,,,100.0,Reprogramada,,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3475,319c8216-caa5-479b-a167-f80a841eedd9,6072,2024-03-13,Cardiología,Dra. Lina Torres,220.0,Completada,2024-03-13,Completada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3536,5a026372-d529-4824-bd62-b9795f3854dc,6475,2023-09-05,Pediatría,Dra. Lina Torres,,Reprogramada,2023-09-05,Reprogramada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3537,f869154d-9cab-4ff3-bbaf-dc3a4bf6e077,6348,2023-01-14,,Dr. Camilo Rojas,220.0,Cancelada,2023-14-01,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3540,09edd1f2-d4ac-4263-815d-bbfd062fbad4,6549,2023-01-16,Cardiología,Dr. Camilo Rojas,220.0,,2023-16-01,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3602,5f97e3e9-bf5a-4fc3-b08b-eb004efb3196,6904,2022-02-06,Neurología,Dr. Camilo Rojas,180.0,Reprogramada,2022-02-06,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3656,0f6754b9-d7cd-470d-8b47-803c4c4d1846,6647,,Neurología,Dr. Andrés Murcia,100.0,Reprogramada,,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3680,8375f3ec-d0fb-4bc9-a81e-85354459744d,6689,,,Dra. Lina Torres,,Reprogramada,,Reprogramada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3703,b8eb00bb-696c-4749-8216-f322d25e3a26,6220,,Cardiología,Dr. Andrés Murcia,100.0,Cancelada,,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3705,941e4531-71d3-4cff-83f2-004ebbf2d603,6203,2023-01-19,,,200.0,Reprogramada,2023-19-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3732,e8d58a5b-7d71-4d32-bba1-b30b624a55b3,6981,,Cardiología,Dr. Camilo Rojas,220.0,Cancelada,,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3740,481928e4-74bc-404f-b43d-04f9249d5814,6847,2023-01-19,Ginecología,Dr. Andrés Murcia,220.0,Cancelada,2023-19-01,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3823,df646c63-941e-48f3-a63b-0cfecd1c01e6,6268,2025-10-24,Ginecología,Dr. Andrés Murcia,,,2025-10-24,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3963,4c184893-b4f8-47e1-9e9b-531cd999adad,6490,2023-08-13,Cardiología,Dr. Andrés Murcia,180.0,Cancelada,2023-08-13,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+3991,cefbc893-384c-4118-b608-8e0c187aa508,6782,2023-01-14,Cardiología,Dr. Andrés Murcia,180.0,,2023-14-01,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4159,2228cbfa-f67a-43cb-a7d8-c54046e9e082,6149,2023-01-17,Cardiología,Dra. Lina Torres,200.0,Reprogramada,2023-17-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4182,8eaabada-986b-4fcb-ba82-6b1ee05e44e6,6051,2023-01-18,Cardiología,Dr. Andrés Murcia,120.0,Cancelada,2023-18-01,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4265,ef32d18a-98a3-4052-bcf8-597d54d5dacd,6089,2023-01-15,Ortopedia,Dr. Andrés Murcia,120.0,,2023-15-01,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4348,e88e60b4-008d-483b-9662-67b70e207c31,6991,2023-01-17,Ortopedia,Dr. Andrés Murcia,180.0,,2023-17-01,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4373,b66b128b-7139-4af6-b808-6806b30feb63,6241,2023-01-13,,Dr. Juan Valdez,200.0,,2023-13-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4377,fb8747bd-7b68-4e83-96d2-a17de05e9731,6888,,Ortopedia,Dra. Lina Torres,120.0,,,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4440,4a8bbb6e-ae25-42c4-9b3f-f7bbc817a765,6112,2023-01-14,Pediatría,Dra. Lina Torres,200.0,Reprogramada,2023-14-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4479,2a6f16ee-bc8f-4b58-83ab-daaf30238e15,6593,2023-01-15,Neurología,Dr. Juan Valdez,180.0,Cancelada,2023-15-01,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4545,bf27e36d-64a3-4391-8196-371129c936d6,6164,2024-07-24,Cardiología,Dr. Juan Valdez,,Cancelada,2024-07-24,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4583,b22b107a-95b7-4bc0-9ea7-95b423bc7ca2,6314,,Pediatría,Dra. Lina Torres,,,,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4675,7d79596b-1294-4236-97fc-8d53178b848c,6710,,Pediatría,Dr. Juan Valdez,120.0,Completada,,Completada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4694,108907ff-c1b5-492d-bb36-72d108805ff7,6359,2023-01-17,Pediatría,,100.0,Completada,2023-17-01,Completada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4713,80cbd898-7ecc-40b7-91b7-eb0b255864eb,6342,2024-01-19,Ortopedia,,120.0,,2024-01-19,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4811,4d3857b7-8efe-440d-90ca-3f281c4b9965,6351,,,Dra. Lina Torres,220.0,Reprogramada,,Reprogramada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+4864,8915e8ea-056f-4235-8f2b-ae2d355594e9,6946,2023-01-25,Pediatría,Dr. Camilo Rojas,200.0,Completada,2023-01-25,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5004,bc934b61-2e78-4f2a-a2e7-08d9edf99255,6334,,,,180.0,,,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5032,13f98868-eac5-4d20-87d3-408761b1dfba,6003,2023-04-26,Ortopedia,Dr. Camilo Rojas,220.0,,2023-04-26,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5066,ee83af8f-ca10-4141-8517-4ff1bd0e9ebf,6728,2023-01-19,Neurología,,120.0,Cancelada,2023-19-01,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5089,855b0b04-62e5-4608-bc76-f85b3b32e60d,6922,2023-05-14,Pediatría,Dr. Andrés Murcia,120.0,Cancelada,2023-05-14,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5195,a9c74d6f-96d8-4011-b18a-44a200646a71,6477,,Neurología,Dr. Andrés Murcia,100.0,Completada,,Completada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5329,5dc3f551-b3e2-4e4b-bfec-a9ac51267707,6837,2023-01-17,Neurología,Dr. Andrés Murcia,220.0,Reprogramada,2023-17-01,Reprogramada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5379,fc077b91-ce2e-49fa-9572-85a6e38a6e46,6767,,Ginecología,,,Cancelada,,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5401,23d3e0b8-75aa-47a6-ab1d-869004b284fb,6332,,Ortopedia,Dr. Camilo Rojas,180.0,Reprogramada,,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5409,440fa5bc-7303-46f0-947b-e45e5e610794,6310,,Neurología,Dra. Lina Torres,100.0,Cancelada,,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5638,ba04149d-3031-4f61-9ce6-2397deed1263,6139,2023-01-13,Cardiología,,,Reprogramada,2023-13-01,Reprogramada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5688,491bc649-c244-4441-a0ee-f8e8cc49c9bd,6466,2023-01-13,Neurología,Dr. Andrés Murcia,200.0,Reprogramada,2023-13-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5690,80cee5d1-4cd0-44ec-bd4e-1153af172f8b,6545,2025-11-22,Neurología,Dr. Andrés Murcia,,,2025-11-22,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5727,43540a59-e078-4db5-8f7d-a5a7622125d0,6721,2022-12-27,,,120.0,,2022-12-27,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5735,015fd158-78fa-467c-a790-91db830b5bbb,6174,,Cardiología,Dr. Andrés Murcia,,Completada,,Completada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5813,ad22563f-f026-427b-904a-332c85009acc,6509,2023-01-15,Neurología,Dra. Lina Torres,120.0,,2023-15-01,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5821,362fba27-0292-458a-a9c5-48dd21676a04,6063,2023-01-20,Ortopedia,,200.0,Reprogramada,2023-20-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5945,86691eef-1ea7-46f8-a76d-24464070f526,6450,2023-01-19,Ortopedia,Dr. Andrés Murcia,200.0,,2023-19-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5960,16fac1ea-7013-4de9-8d87-30fef817591a,6176,2024-01-08,Ginecología,,100.0,Completada,2024-01-08,Completada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+5991,a191c366-4319-42a4-9b30-0942828903b4,6797,2023-01-13,Cardiología,Dr. Juan Valdez,180.0,Cancelada,2023-13-01,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6007,0d4b8480-aa27-475f-a641-e953b6bb25c6,6562,,Pediatría,Dr. Juan Valdez,120.0,Reprogramada,,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6010,4d2f57e6-4561-4760-a623-8b52f7258482,6859,2023-01-20,,,100.0,Cancelada,2023-20-01,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6090,36682116-6a1e-4028-acfd-97296325e56c,6125,2023-01-20,Cardiología,,200.0,Cancelada,2023-20-01,Cancelada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6292,5de08f84-3730-4a7f-9a4c-346488f3bb5d,6673,2023-08-16,Ginecología,Dr. Camilo Rojas,120.0,Reprogramada,2023-08-16,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6417,fc160896-eddf-4905-ad15-441b4fd1b9a0,6087,2024-09-28,Ginecología,Dr. Andrés Murcia,220.0,Cancelada,2024-09-28,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6494,8d417592-3772-47ed-a67b-850c06cf52d4,6690,2023-01-16,Pediatría,Dr. Andrés Murcia,200.0,Reprogramada,2023-16-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6515,2fe58147-a499-4ee8-b38d-d554b4f9cd6c,6758,2023-01-20,Ginecología,Dr. Andrés Murcia,180.0,Completada,2023-20-01,Completada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6586,38b8ab85-c787-4124-a189-20ea206bd60c,6146,2023-05-03,Ortopedia,,,,2023-05-03,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6590,62770a68-4f05-4127-a252-f34fdae50fc7,6814,2023-01-16,Ginecología,Dr. Camilo Rojas,120.0,Cancelada,2023-16-01,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6593,7c4a349e-79e5-4492-9957-5782cce0aa02,6488,2023-01-19,Cardiología,Dr. Camilo Rojas,200.0,,2023-19-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6637,1b3ce637-8632-46cd-aecd-5d96930d0c36,6363,2024-08-04,,Dra. Lina Torres,100.0,,2024-08-04,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6654,9481da76-ed87-46eb-8ff5-785788dfae67,6395,2022-08-27,Neurología,Dr. Camilo Rojas,100.0,,2022-08-27,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6670,1927e498-f79f-49f3-936f-ec097fa61282,6894,2022-03-22,Ortopedia,Dra. Lina Torres,100.0,,2022-03-22,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6746,0fccdaa1-5f0b-4092-8588-100c8cc061f2,6787,2023-01-19,Pediatría,,220.0,Cancelada,2023-19-01,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6759,9cb255fe-57e6-44eb-a3b4-8838d79c3ba2,6460,2024-08-14,Pediatría,Dr. Andrés Murcia,180.0,Cancelada,2024-08-14,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6761,2ba7add2-4891-4cbd-8d58-089a5e028b5f,6068,2023-06-02,Ortopedia,Dr. Camilo Rojas,220.0,Completada,2023-06-02,Completada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6774,de74dc31-1125-4614-953a-d7ce36d1bb4d,6773,2025-11-21,,Dr. Andrés Murcia,200.0,Completada,2025-11-21,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6823,9a304ab5-2bfa-49ff-a563-aa912df62732,6865,,Pediatría,Dr. Juan Valdez,100.0,Reprogramada,,Reprogramada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6911,fa84f273-c51d-4b72-ad85-b6126fe8a9f5,6963,2023-01-19,Neurología,Dr. Camilo Rojas,200.0,,2023-19-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+6959,ab6ebec6-3164-4adb-9a8f-e56c5b6efb78,6733,,Ginecología,Dr. Andrés Murcia,,Cancelada,,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7094,93810ded-8745-4f04-b8fc-e66d0905c6a1,6011,2023-01-20,Ginecología,Dra. Lina Torres,100.0,Completada,2023-20-01,Completada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7098,634ad5bd-a0f5-42b8-9d09-42a2e6f7c7d9,6684,2023-01-19,Pediatría,,220.0,,2023-19-01,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7162,a046da1a-4321-4ecc-ba99-87871c31f838,6350,2023-01-17,Cardiología,Dr. Juan Valdez,220.0,Cancelada,2023-17-01,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7217,ef8f40d4-d706-4c0d-b4dc-d3fbd29454c7,6124,2022-12-08,Ortopedia,Dra. Lina Torres,220.0,,2022-12-08,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7240,517b4f36-c57f-4287-a805-40033da8267b,6012,2023-01-13,,Dr. Andrés Murcia,180.0,Cancelada,2023-13-01,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7344,decaeecc-1ed6-40e1-a0ac-67cd7fad75cf,6567,2023-01-20,,Dr. Andrés Murcia,220.0,Reprogramada,2023-20-01,Reprogramada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7400,77692731-3ec6-4d15-890c-0cae6336bb89,6494,,Cardiología,Dr. Juan Valdez,,Reprogramada,,Reprogramada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7405,ccbc11f3-0b68-4a69-872e-64a8414e5398,6047,2024-12-12,Neurología,Dra. Lina Torres,180.0,,2024-12-12,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7410,250e5d8a-b6a6-4714-9793-6b1bef2ff1a9,6874,2022-07-14,Cardiología,Dr. Andrés Murcia,200.0,,2022-07-14,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7468,6bfbf176-4d1f-4129-908d-fcbd65402ba9,6329,2023-01-15,Neurología,,120.0,Reprogramada,2023-15-01,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7475,17dbd40e-2a5b-49e5-bcba-7ce7507cbf8e,6241,,Ortopedia,Dr. Andrés Murcia,120.0,Cancelada,,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7478,f11d1a3a-95ca-4239-bc8f-92ec849e6a49,6464,2024-02-16,Pediatría,Dr. Juan Valdez,,Cancelada,2024-02-16,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7592,24a431be-2fde-4d90-9074-1dc2d5648c93,6183,,Pediatría,,200.0,Completada,,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7599,aa49c5d7-b64a-480a-bd7d-a29748e28496,6989,2023-01-18,Pediatría,,220.0,,2023-18-01,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7742,a5fee392-400d-435c-a00f-1d893b4fd488,6288,2023-01-20,Ginecología,Dr. Camilo Rojas,200.0,Reprogramada,2023-20-01,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7775,c901a0b6-9ca8-4f01-8d64-2cd3df022dfa,6613,2023-01-20,Cardiología,Dr. Juan Valdez,,Cancelada,2023-20-01,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7823,d4e7b519-cf9f-437b-b3cc-3deb1d936999,6313,,Neurología,Dra. Lina Torres,200.0,Completada,,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7837,93d7910e-cb81-4f64-baec-071d9e347745,6714,2025-12-21,Ginecología,,200.0,Reprogramada,2025-12-21,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7838,234b2ed0-b9b3-4272-8e51-0b089e73bd17,6379,,Neurología,,200.0,Reprogramada,,Reprogramada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7852,148d0250-5e00-4146-91d4-94a12c36897b,6544,2023-01-17,,Dr. Juan Valdez,200.0,Cancelada,2023-17-01,Cancelada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+7952,54314837-d376-4079-9b4d-c09498095307,6071,2025-03-18,,,180.0,Reprogramada,2025-03-18,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8066,c5b45f39-0fec-4f92-a173-d5b67e029240,6607,2023-01-19,,,180.0,,2023-19-01,,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8071,5afb83c5-829f-4eba-83f7-e20e9c276f48,6956,2023-01-17,Pediatría,Dra. Lina Torres,200.0,,2023-17-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8158,1c5df478-ff94-4d1d-9ee0-044137fae2e0,6892,2023-01-14,Cardiología,Dr. Camilo Rojas,,,2023-14-01,,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8201,d77fd98d-5140-4860-b1c7-e279b1ac255d,6874,2022-10-09,Neurología,Dr. Juan Valdez,180.0,Cancelada,2022-10-09,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8226,7309519b-2bcb-4c76-8fd4-9552665dfd49,6555,2023-01-16,Ortopedia,,180.0,Reprogramada,2023-16-01,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8383,492fe104-18b4-4c7b-b043-3a93779f2f1b,6911,,Neurología,Dr. Andrés Murcia,220.0,Cancelada,,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8546,3c76e72f-56b2-4736-80fa-e9606a815890,6655,2025-08-29,Pediatría,Dr. Andrés Murcia,100.0,Cancelada,2025-08-29,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8587,99641bd2-d9e6-41c6-9113-6f47bb7550ea,6628,,Cardiología,Dr. Juan Valdez,200.0,Cancelada,,Cancelada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8689,de38477e-fef7-4264-8a06-4e2571199459,6865,2023-01-17,,Dr. Juan Valdez,220.0,Cancelada,2023-17-01,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8712,49be4e5f-6ddd-4978-8694-5f50b74986dd,6770,2023-01-14,,Dr. Andrés Murcia,120.0,Cancelada,2023-14-01,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8731,131d66b3-5cf7-49d0-9eb5-93b119bb249b,6102,,Ortopedia,Dr. Andrés Murcia,180.0,Completada,,Completada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8778,d781b1a9-302c-49c7-94da-01068b9ddc60,6617,2023-01-17,Ortopedia,,200.0,Completada,2023-17-01,Completada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+8963,36d346ed-14d9-41f1-9746-fad6a019c4be,6982,2023-01-15,Cardiología,Dr. Camilo Rojas,200.0,,2023-15-01,,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9108,45763f6f-cc9e-4f66-9d0f-6b3e00fa8a03,6504,2023-01-18,,Dra. Lina Torres,,Completada,2023-18-01,Completada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9118,b9700aa8-23f9-4059-990a-3e83c4beb0c7,6188,2023-01-19,Ortopedia,Dr. Camilo Rojas,180.0,Cancelada,2023-19-01,Cancelada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9156,5c2dc228-eb89-44aa-8596-9db4fa5e899d,6078,,Neurología,,220.0,Cancelada,,Cancelada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9200,5bd2ef77-844e-4fb0-8c5d-99ca270896d0,6081,2023-01-15,Ortopedia,Dr. Juan Valdez,120.0,Cancelada,2023-15-01,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9240,a1d51be0-b25d-48e4-a98c-671659f516da,6472,,Pediatría,Dr. Juan Valdez,,Completada,,Completada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9246,4244b46d-2170-4eab-88d4-afd6c653d78e,6879,2024-02-03,Neurología,Dr. Camilo Rojas,180.0,Reprogramada,2024-02-03,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9278,847fd095-93d2-4191-8f74-9ac4cedcbf9e,6303,2025-11-25,Pediatría,Dr. Andrés Murcia,120.0,Cancelada,2025-11-25,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9298,ac4a4f25-151a-4c25-8a42-4cfe1d3475a2,6094,,Ortopedia,Dr. Camilo Rojas,,Reprogramada,,Reprogramada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9301,d9295c83-62b5-4e4a-b8f4-4ddaa5f8f8c6,6322,,Ortopedia,Dra. Lina Torres,220.0,Completada,,Completada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9334,87990ffc-a9de-4cf6-8ba6-af46fc9cad69,6890,2023-01-15,Pediatría,Dr. Andrés Murcia,100.0,,2023-15-01,,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9363,57d13db0-3956-48c3-9f30-592665749efe,6558,2022-07-14,Pediatría,Dra. Lina Torres,120.0,,2022-07-14,,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9390,5f0b83e0-1fcb-4ff0-ae37-b1aba8794e12,6650,2023-01-19,Ortopedia,Dr. Andrés Murcia,120.0,Reprogramada,2023-19-01,Reprogramada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9392,cad197bd-c7cd-4610-9211-60d6e72941d5,6763,2023-01-15,,Dr. Andrés Murcia,,Cancelada,2023-15-01,Cancelada,,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9446,22e5dbd6-0268-4517-9804-ee56fab52ba8,6865,,Ginecología,Dr. Juan Valdez,180.0,Reprogramada,,Reprogramada,180.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9476,915b4204-f50d-47c0-9c3d-674d99c90d3e,6019,2022-04-04,Ginecología,,100.0,Cancelada,2022-04-04,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9563,29c37349-8329-44ea-96ea-c28e9939cda5,6369,2023-01-13,Pediatría,,120.0,Cancelada,2023-13-01,Cancelada,120.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9565,bf0b591d-b332-47c9-a9e1-a420c2793662,6949,,Neurología,Dr. Juan Valdez,100.0,Cancelada,,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9596,a04f6be4-5abe-458e-b545-a3dbabc6fcf0,6229,,Ginecología,Dr. Andrés Murcia,100.0,Cancelada,,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9617,dd9ad64e-f21b-4b30-a525-27fb15e361f1,6108,,Pediatría,Dra. Lina Torres,220.0,Reprogramada,,Reprogramada,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9893,12ae8a04-3adf-4585-921e-5a79fcbc205a,6255,2025-01-07,Ortopedia,Dr. Juan Valdez,200.0,Cancelada,2025-01-07,Cancelada,200.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9922,173da1a7-b036-46eb-b1ca-083be9b5c0e8,6052,,Ortopedia,Dr. Andrés Murcia,100.0,Cancelada,,Cancelada,100.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA
+9941,604f8b2a-031c-4340-bfb9-8a56804dd5dd,6365,,,Dra. Lina Torres,220.0,,,,220.0,Cita huérfana (FK id_paciente no encontrado en pacientes),R_ORPHAN_CITA

@@ -6,8 +6,4 @@ __pycache__/
 .venv/
 .venv*/
 .DS_Store
-
-# Output files are regenerable via the pipeline; do not commit.
-data/processed/
-data/reports/
 .coverage

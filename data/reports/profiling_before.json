@@ -1,0 +1,166 @@
+{
+  "pacientes": {
+    "table": "pacientes",
+    "row_count": 5010,
+    "missing_counts": {
+      "id_paciente": 0,
+      "nombre": 0,
+      "fecha_nacimiento": 0,
+      "edad": 1647,
+      "sexo": 1023,
+      "email": 2506,
+      "telefono": 1668,
+      "ciudad": 827
+    },
+    "duplicate_counts": {
+      "exact_duplicate_rows": 10,
+      "pk_duplicate_rows": 10
+    },
+    "format_anomalies": {
+      "fecha_nacimiento_invalid_raw": 4,
+      "fecha_nacimiento_recovered_by_swap": 3,
+      "fecha_nacimiento_final_null": 1,
+      "sexo_invalid": 0,
+      "email_invalid": 0,
+      "telefono_invalid": 0
+    },
+    "categorical_cardinality": {
+      "sexo": {
+        "unique_count": 4,
+        "top": [
+          {
+            "value": "Male",
+            "count": 1049
+          },
+          {
+            "value": "F",
+            "count": 1004
+          },
+          {
+            "value": "Female",
+            "count": 972
+          },
+          {
+            "value": "M",
+            "count": 962
+          }
+        ]
+      },
+      "ciudad": {
+        "unique_count": 5,
+        "top": [
+          {
+            "value": "Cali",
+            "count": 861
+          },
+          {
+            "value": "Bogotá",
+            "count": 856
+          },
+          {
+            "value": "Bucaramanga",
+            "count": 847
+          },
+          {
+            "value": "Medellín",
+            "count": 812
+          },
+          {
+            "value": "Barranquilla",
+            "count": 807
+          }
+        ]
+      }
+    }
+  },
+  "citas_medicas": {
+    "table": "citas_medicas",
+    "row_count": 9961,
+    "missing_counts": {
+      "id_cita": 0,
+      "id_paciente": 0,
+      "fecha_cita": 3278,
+      "especialidad": 1673,
+      "medico": 2033,
+      "costo": 1724,
+      "estado_cita": 2542
+    },
+    "duplicate_counts": {
+      "exact_duplicate_rows": 0,
+      "pk_duplicate_rows": 0
+    },
+    "format_anomalies": {
+      "fecha_cita_invalid_raw": 3314,
+      "fecha_cita_recovered_by_swap": 3314,
+      "fecha_cita_final_null": 0,
+      "estado_cita_invalid": 0,
+      "costo_non_numeric": 0,
+      "costo_negative": 0
+    },
+    "categorical_cardinality": {
+      "estado_cita": {
+        "unique_count": 3,
+        "top": [
+          {
+            "value": "Reprogramada",
+            "count": 2533
+          },
+          {
+            "value": "Cancelada",
+            "count": 2490
+          },
+          {
+            "value": "Completada",
+            "count": 2396
+          }
+        ]
+      },
+      "especialidad": {
+        "unique_count": 5,
+        "top": [
+          {
+            "value": "Neurología",
+            "count": 1680
+          },
+          {
+            "value": "Ginecología",
+            "count": 1674
+          },
+          {
+            "value": "Ortopedia",
+            "count": 1661
+          },
+          {
+            "value": "Pediatría",
+            "count": 1638
+          },
+          {
+            "value": "Cardiología",
+            "count": 1635
+          }
+        ]
+      },
+      "medico": {
+        "unique_count": 4,
+        "top": [
+          {
+            "value": "Dra. Lina Torres",
+            "count": 2068
+          },
+          {
+            "value": "Dr. Andrés Murcia",
+            "count": 2004
+          },
+          {
+            "value": "Dr. Camilo Rojas",
+            "count": 1930
+          },
+          {
+            "value": "Dr. Juan Valdez",
+            "count": 1926
+          }
+        ]
+      }
+    }
+  }
+}

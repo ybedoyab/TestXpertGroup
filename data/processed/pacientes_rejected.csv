@@ -1,0 +1,1 @@
+source_row_id,id_paciente,nombre,fecha_nacimiento,edad,sexo,email,telefono,ciudad,sexo_original,fecha_nacimiento_original,edad_original,edad_derivada,edad_limpia,edad_inconsistente,email_original,telefono_original,rejection_reason,rejection_rule_id
