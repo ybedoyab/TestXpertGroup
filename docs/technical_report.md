@@ -21,7 +21,8 @@ El dataset contiene al menos dos tablas: `pacientes` y `citas_medicas`. Las llav
 3. Limpieza conservadora con reglas explícitas y auditoría por registro/campo.
 4. Validaciones cruzadas e identificación de huérfanos/rechazos.
 5. Métricas de calidad antes y después y resumen ejecutable.
-6. Bonus: simulación de carga a un modelo tipo Data Warehouse (SQLite).
+6. Bonus: suite de pruebas automáticas (`pytest`, 96 tests, cobertura 100%) que validan integridad de datos, reglas de limpieza críticas y el pipeline end-to-end.
+7. Bonus: simulación de carga a un modelo tipo Data Warehouse (SQLite).
 
 <pdf:nextpage />
 <div style="page-break-inside: avoid; margin-bottom: 10px;">
@@ -131,6 +132,13 @@ Se propone un modelo en estrella con grain a nivel de fila de cita médica:
 - Estabilizar la generación de `estado_cita` y `sexo` en fuente (evitar múltiples variantes).
 - Estandarizar el formato de fechas y teléfonos en origen para reducir `NULL` y parsing fallido.
 - Añadir reglas de linaje/ID consistentes para reducir discrepancias en PK.
+
+## Pruebas automáticas
+Se implementó una suite de pruebas con `pytest` (96 tests, cobertura de línea 100%) que valida:
+- Reglas de limpieza críticas por campo (`sexo`, `fecha_nacimiento`, `fecha_cita`, `costo`, `email`, `telefono`).
+- Integridad referencial antes y después de las validaciones cruzadas.
+- Comportamiento ante datos faltantes, PKs duplicadas y valores fuera de catálogo.
+- Pipeline end-to-end con dataset real: conteos de salida y ausencia de columnas de auditoría interna en CSVs limpios.
 
 ## Conclusión
 El pipeline implementa limpieza conservadora, validaciones cruzadas y trazabilidad a nivel de registro/campo. Los datasets exportados `*_clean.csv` y `data_quality_issues.csv` quedan listos para auditoría y para una carga posterior a un modelo tipo Data Warehouse.

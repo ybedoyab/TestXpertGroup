@@ -118,13 +118,6 @@ def compute_age(reference_date: date, birth_date: date | None) -> int | None:
     return years
 
 
-def coalesce_str(value: Any) -> str | None:
-    if value is None:
-        return None
-    v = str(value).strip()
-    return v if v else None
-
-
 def try_cast_int(value: Any) -> int | None:
     if value is None:
         return None

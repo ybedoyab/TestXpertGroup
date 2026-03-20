@@ -7,11 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.core.schemas import (
-    IssueRecord,
-    export_columns_citas_medicas,
-    export_columns_pacientes,
-)
+from src.core.schemas import EXPORT_COLUMNS_CITAS_MEDICAS, EXPORT_COLUMNS_PACIENTES, IssueRecord
 from src.core.utils import ensure_dir
 
 logger = logging.getLogger(__name__)
@@ -54,29 +50,22 @@ def export_datasets(
     ensure_dir(reports_dir)
 
     _write_csv(
-        _select_export_columns(pacientes_clean, export_columns_pacientes()),
+        _select_export_columns(pacientes_clean, EXPORT_COLUMNS_PACIENTES),
         processed_dir / "pacientes_clean.csv",
     )
     _write_csv(
-        _select_export_columns(citas_clean, export_columns_citas_medicas()),
+        _select_export_columns(citas_clean, EXPORT_COLUMNS_CITAS_MEDICAS),
         processed_dir / "citas_medicas_clean.csv",
     )
 
-    if pacientes_rejected is not None and not pacientes_rejected.empty:
-        _write_csv(pacientes_rejected, processed_dir / "pacientes_rejected.csv")
-    else:
-        _write_csv(
-            pacientes_rejected if pacientes_rejected is not None else pd.DataFrame(),
-            processed_dir / "pacientes_rejected.csv",
-        )
-
-    if citas_rejected is not None and not citas_rejected.empty:
-        _write_csv(citas_rejected, processed_dir / "citas_medicas_rejected.csv")
-    else:
-        _write_csv(
-            citas_rejected if citas_rejected is not None else pd.DataFrame(),
-            processed_dir / "citas_medicas_rejected.csv",
-        )
+    _write_csv(
+        pacientes_rejected if pacientes_rejected is not None else pd.DataFrame(),
+        processed_dir / "pacientes_rejected.csv",
+    )
+    _write_csv(
+        citas_rejected if citas_rejected is not None else pd.DataFrame(),
+        processed_dir / "citas_medicas_rejected.csv",
+    )
 
     issues_df = pd.DataFrame([i.to_dict() for i in issues])
     _write_csv(issues_df, processed_dir / "data_quality_issues.csv")

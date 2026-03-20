@@ -12,7 +12,7 @@ from config.settings import Settings
 from src.core.audit import add_issue
 from src.core.catalog_normalizers import normalize_estado_cita
 from src.core.cleaning_pk import resolve_pk_duplicates
-from src.core.schemas import IssueRecord, pk_column_citas
+from src.core.schemas import IssueRecord, PK_CITAS
 from src.core.utils import parse_date_str, try_cast_float
 
 logger = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ def clean_citas_medicas(
     settings: Settings,
 ) -> tuple[pd.DataFrame, pd.DataFrame, list[IssueRecord]]:
     table_name = "citas_medicas"
-    pk_col = pk_column_citas()
+    pk_col = PK_CITAS
     issues: list[IssueRecord] = []
 
     dfw = df.copy()

@@ -6,7 +6,7 @@ import pandas as pd
 
 from config.settings import Settings
 from src.core.catalog_normalizers import normalize_sexo
-from src.core.schemas import expected_columns_pacientes
+from src.core.schemas import EXPECTED_COLUMNS_PACIENTES
 from src.core.utils import (
     compute_age,
     is_valid_email,
@@ -22,7 +22,7 @@ def compute_metrics_for_pacientes(
     reference_date: Any,
     settings: Settings,
 ) -> dict[str, Any]:
-    expected_cols = expected_columns_pacientes()
+    expected_cols = EXPECTED_COLUMNS_PACIENTES
     out: dict[str, Any] = {"row_count": int(len(df))}
     out["completeness"] = completeness(df, expected_cols)
     out["pk_uniqueness"] = pk_uniqueness(df, "id_paciente")

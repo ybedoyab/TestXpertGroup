@@ -2,6 +2,7 @@ from __future__ import annotations
 
 """Pipeline orchestration from extraction to reports."""
 
+from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
 from typing import Any
@@ -29,29 +30,21 @@ def parse_reference_date(value: str) -> date:
 
 
 def build_issue_stats(issues: list[Any]) -> dict[str, Any]:
-    by_severity: dict[str, int] = {}
-    by_rule_id: dict[str, int] = {}
-    for i in issues:
-        sev = getattr(i, "severity", "info")
-        rid = getattr(i, "rule_id", "UNKNOWN")
-        by_severity[sev] = by_severity.get(sev, 0) + 1
-        by_rule_id[rid] = by_rule_id.get(rid, 0) + 1
-
+    _order = {"info": 0, "warning": 1, "error": 2}
+    by_severity: Counter[str] = Counter()
+    by_rule_id: Counter[str] = Counter()
     severity_by_rule: dict[str, str] = {}
     for i in issues:
-        rid = getattr(i, "rule_id", "UNKNOWN")
         sev = getattr(i, "severity", "info")
-        if rid not in severity_by_rule:
+        rid = getattr(i, "rule_id", "UNKNOWN")
+        by_severity[sev] += 1
+        by_rule_id[rid] += 1
+        if rid not in severity_by_rule or _order.get(sev, 0) > _order.get(severity_by_rule[rid], 0):
             severity_by_rule[rid] = sev
-        else:
-            order = {"info": 0, "warning": 1, "error": 2}
-            if order.get(sev, 0) > order.get(severity_by_rule[rid], 0):
-                severity_by_rule[rid] = sev
-
     return {
         "total_issues": len(issues),
-        "by_severity": by_severity,
-        "by_rule_id": by_rule_id,
+        "by_severity": dict(by_severity),
+        "by_rule_id": dict(by_rule_id),
         "severity_by_rule": severity_by_rule,
     }
 

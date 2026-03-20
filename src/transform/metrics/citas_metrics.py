@@ -6,7 +6,7 @@ import pandas as pd
 
 from config.settings import Settings
 from src.core.catalog_normalizers import normalize_estado_cita
-from src.core.schemas import expected_columns_citas_medicas
+from src.core.schemas import EXPECTED_COLUMNS_CITAS_MEDICAS
 from src.core.utils import parse_date_str, try_cast_float
 from src.transform.metrics.base import completeness, pk_uniqueness, validity_pct_non_null
 
@@ -17,7 +17,7 @@ def compute_metrics_for_citas(
     pacientes_ids: set[Any],
     settings: Settings,
 ) -> dict[str, Any]:
-    expected_cols = expected_columns_citas_medicas()
+    expected_cols = EXPECTED_COLUMNS_CITAS_MEDICAS
     out: dict[str, Any] = {"row_count": int(len(df))}
     out["completeness"] = completeness(df, expected_cols)
     out["pk_uniqueness"] = pk_uniqueness(df, "id_cita")

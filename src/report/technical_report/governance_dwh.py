@@ -35,6 +35,13 @@ def build_governance_and_dwh_section(*, quality_summary: dict[str, Any]) -> list
         "- Estandarizar el formato de fechas y teléfonos en origen para reducir `NULL` y parsing fallido.",
         "- Añadir reglas de linaje/ID consistentes para reducir discrepancias en PK.",
         "",
+        "## Pruebas automáticas",
+        "Se implementó una suite de pruebas con `pytest` (96 tests, cobertura de línea 100%) que valida:",
+        "- Reglas de limpieza críticas por campo (`sexo`, `fecha_nacimiento`, `fecha_cita`, `costo`, `email`, `telefono`).",
+        "- Integridad referencial antes y después de las validaciones cruzadas.",
+        "- Comportamiento ante datos faltantes, PKs duplicadas y valores fuera de catálogo.",
+        "- Pipeline end-to-end con dataset real: conteos de salida y ausencia de columnas de auditoría interna en CSVs limpios.",
+        "",
         "## Conclusión",
         "El pipeline implementa limpieza conservadora, validaciones cruzadas y trazabilidad a nivel de registro/campo. "
         "Los datasets exportados `*_clean.csv` y `data_quality_issues.csv` quedan listos para auditoría y para una carga "

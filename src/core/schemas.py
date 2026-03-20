@@ -80,76 +80,29 @@ class QualityMetrics:
         return {"global_metrics": self.global_metrics, "table_metrics": self.table_metrics}
 
 
-def expected_columns_pacientes() -> list[str]:
-    return [
-        "id_paciente",
-        "nombre",
-        "fecha_nacimiento",
-        "edad",
-        "sexo",
-        "email",
-        "telefono",
-        "ciudad",
-    ]
+PK_PACIENTES = "id_paciente"
+PK_CITAS = "id_cita"
 
+EXPECTED_COLUMNS_PACIENTES: list[str] = [
+    "id_paciente", "nombre", "fecha_nacimiento", "edad", "sexo", "email", "telefono", "ciudad",
+]
 
-def expected_columns_citas_medicas() -> list[str]:
-    return [
-        "id_cita",
-        "id_paciente",
-        "fecha_cita",
-        "especialidad",
-        "medico",
-        "costo",
-        "estado_cita",
-    ]
+EXPECTED_COLUMNS_CITAS_MEDICAS: list[str] = [
+    "id_cita", "id_paciente", "fecha_cita", "especialidad", "medico", "costo", "estado_cita",
+]
 
+REQUIRED_COLUMNS_MINIMAL_SCHEMA: dict[str, list[str]] = {
+    "pacientes": ["id_paciente", "nombre", "fecha_nacimiento", "sexo"],
+    "citas_medicas": ["id_cita", "id_paciente", "fecha_cita", "estado_cita", "costo"],
+}
 
-def required_columns_for_minimal_schema() -> dict[str, list[str]]:
-    return {
-        "pacientes": ["id_paciente", "nombre", "fecha_nacimiento", "sexo"],
-        "citas_medicas": ["id_cita", "id_paciente", "fecha_cita", "estado_cita", "costo"],
-    }
+# Columnas publicadas en CSVs limpios — excluye auditoría interna (*_original, source_row_id, edad_limpia)
+EXPORT_COLUMNS_PACIENTES: list[str] = [
+    "id_paciente", "nombre", "fecha_nacimiento", "edad", "edad_derivada", "edad_inconsistente",
+    "sexo", "email", "telefono", "ciudad",
+]
 
-
-def pk_column_pacientes() -> str:
-    return "id_paciente"
-
-
-def pk_column_citas() -> str:
-    return "id_cita"
-
-
-def export_columns_pacientes() -> list[str]:
-    """Columnas canónicas del CSV limpio de pacientes.
-
-    Incluye los campos originales más los derivados de calidad relevantes para
-    el consumidor final. Las columnas de auditoría interna (`*_original`,
-    `source_row_id`, `edad_limpia`) se publican únicamente en `data_quality_issues.csv`.
-    """
-    return [
-        "id_paciente",
-        "nombre",
-        "fecha_nacimiento",
-        "edad",
-        "edad_derivada",
-        "edad_inconsistente",
-        "sexo",
-        "email",
-        "telefono",
-        "ciudad",
-    ]
-
-
-def export_columns_citas_medicas() -> list[str]:
-    """Columnas canónicas del CSV limpio de citas médicas."""
-    return [
-        "id_cita",
-        "id_paciente",
-        "fecha_cita",
-        "especialidad",
-        "medico",
-        "costo",
-        "estado_cita",
-    ]
+EXPORT_COLUMNS_CITAS_MEDICAS: list[str] = [
+    "id_cita", "id_paciente", "fecha_cita", "especialidad", "medico", "costo", "estado_cita",
+]
 

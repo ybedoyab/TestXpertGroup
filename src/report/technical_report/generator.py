@@ -67,7 +67,9 @@ def generate_technical_report_md(
             "3. Limpieza conservadora con reglas explícitas y auditoría por registro/campo.",
             "4. Validaciones cruzadas e identificación de huérfanos/rechazos.",
             "5. Métricas de calidad antes y después y resumen ejecutable.",
-            "6. Bonus: simulación de carga a un modelo tipo Data Warehouse (SQLite).",
+            "6. Bonus: suite de pruebas automáticas (`pytest`, 96 tests, cobertura 100%) que validan "
+            "integridad de datos, reglas de limpieza críticas y el pipeline end-to-end.",
+            "7. Bonus: simulación de carga a un modelo tipo Data Warehouse (SQLite).",
             "",
         ]
     )

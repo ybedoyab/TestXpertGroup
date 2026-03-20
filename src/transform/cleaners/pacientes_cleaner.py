@@ -7,15 +7,15 @@ from datetime import date
 
 import pandas as pd
 
-logger = logging.getLogger(__name__)
-
 from config.settings import Settings
 from src.core.audit import add_issue
 from src.core.catalog_normalizers import normalize_sexo
 from src.core.cleaning_pk import resolve_pk_duplicates
-from src.core.schemas import IssueRecord, pk_column_pacientes
+from src.core.schemas import IssueRecord, PK_PACIENTES
 from src.core.utils import compute_age, parse_date_str, try_cast_int
 from src.transform.cleaners.pacientes_contact_cleaner import clean_pacientes_contacto
+
+logger = logging.getLogger(__name__)
 
 
 def clean_pacientes(
@@ -25,7 +25,7 @@ def clean_pacientes(
     settings: Settings,
 ) -> tuple[pd.DataFrame, pd.DataFrame, list[IssueRecord]]:
     table_name = "pacientes"
-    pk_col = pk_column_pacientes()
+    pk_col = PK_PACIENTES
     issues: list[IssueRecord] = []
 
     dfw = df.copy()

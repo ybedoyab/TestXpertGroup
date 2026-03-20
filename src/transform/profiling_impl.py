@@ -12,10 +12,10 @@ import pandas as pd
 from src.core.schemas import (
     CATALOG_ESTADO_CITA,
     CATALOG_SEXO,
-    expected_columns_citas_medicas,
-    expected_columns_pacientes,
-    pk_column_citas,
-    pk_column_pacientes,
+    EXPECTED_COLUMNS_CITAS_MEDICAS,
+    EXPECTED_COLUMNS_PACIENTES,
+    PK_CITAS,
+    PK_PACIENTES,
 )
 from src.core.utils import (
     ensure_dir,
@@ -64,32 +64,47 @@ def _top_categories(series: pd.Series, *, limit: int = 5) -> list[dict[str, Any]
     return [{"value": str(k), "count": int(v)} for k, v in vc.items()]
 
 
-def profile_pacientes(df: pd.DataFrame) -> dict[str, Any]:
-    expected_cols = expected_columns_pacientes()
-    pk_col = pk_column_pacientes()
-    out: dict[str, Any] = {"table": "pacientes"}
-
-    out["row_count"] = int(len(df))
-
-    missing_counts = {c: int(df[c].isna().sum()) for c in expected_cols if c in df.columns}
-    out["missing_counts"] = missing_counts
-
+def _profile_table(
+    df: pd.DataFrame,
+    *,
+    table: str,
+    expected_cols: list[str],
+    pk_col: str,
+    date_col: str,
+    date_key_prefix: str,
+    categorical_cols: list[str],
+    extra_anomalies: dict[str, Any],
+) -> dict[str, Any]:
+    out: dict[str, Any] = {"table": table, "row_count": int(len(df))}
+    out["missing_counts"] = {c: int(df[c].isna().sum()) for c in expected_cols if c in df.columns}
     dedup_df = df.drop(columns=["source_row_id"], errors="ignore")
     out["duplicate_counts"] = {
         "exact_duplicate_rows": int(dedup_df.duplicated().sum()),
         "pk_duplicate_rows": int(df[pk_col].duplicated().sum()) if pk_col in df.columns else 0,
     }
-
     fecha_stats = (
-        _date_anomaly_stats(df["fecha_nacimiento"])
-        if "fecha_nacimiento" in df.columns
+        _date_anomaly_stats(df[date_col])
+        if date_col in df.columns
         else {"invalid_raw": 0, "recovered_by_swap": 0, "final_null": 0}
     )
+    out["format_anomalies"] = {
+        f"{date_key_prefix}_invalid_raw": fecha_stats["invalid_raw"],
+        f"{date_key_prefix}_recovered_by_swap": fecha_stats["recovered_by_swap"],
+        f"{date_key_prefix}_final_null": fecha_stats["final_null"],
+        **extra_anomalies,
+    }
+    out["categorical_cardinality"] = {
+        col: {"unique_count": int(df[col].nunique(dropna=True)), "top": _top_categories(df[col], limit=5)}
+        for col in categorical_cols
+        if col in df.columns
+    }
+    return out
 
+
+def profile_pacientes(df: pd.DataFrame) -> dict[str, Any]:
     sexo_valid = 0
     if "sexo" in df.columns:
-        sexo_lower = df["sexo"].dropna().astype(str).str.strip().str.lower()
-        sexo_valid = int(sexo_lower.isin(CATALOG_SEXO.keys()).sum())
+        sexo_valid = int(df["sexo"].dropna().astype(str).str.strip().str.lower().isin(CATALOG_SEXO.keys()).sum())
     sexo_invalid = int(df["sexo"].notna().sum() - sexo_valid) if "sexo" in df.columns else 0
 
     email_invalid = 0
@@ -103,52 +118,28 @@ def profile_pacientes(df: pd.DataFrame) -> dict[str, Any]:
         digits_len = df.loc[tel_mask, "telefono"].apply(normalize_phone_digits).dropna().str.len()
         telefono_invalid = int(tel_mask.sum() - int((digits_len >= 10).sum()))
 
-    out["format_anomalies"] = {
-        "fecha_nacimiento_invalid_raw": fecha_stats["invalid_raw"],
-        "fecha_nacimiento_recovered_by_swap": fecha_stats["recovered_by_swap"],
-        "fecha_nacimiento_final_null": fecha_stats["final_null"],
-        "sexo_invalid": sexo_invalid,
-        "email_invalid": email_invalid,
-        "telefono_invalid": telefono_invalid,
-    }
-
-    card = {}
-    for col in ["sexo", "ciudad"]:
-        if col in df.columns:
-            card[col] = {
-                "unique_count": int(df[col].nunique(dropna=True)),
-                "top": _top_categories(df[col], limit=5),
-            }
-    out["categorical_cardinality"] = card
-
-    return out
+    return _profile_table(
+        df,
+        table="pacientes",
+        expected_cols=EXPECTED_COLUMNS_PACIENTES,
+        pk_col=PK_PACIENTES,
+        date_col="fecha_nacimiento",
+        date_key_prefix="fecha_nacimiento",
+        categorical_cols=["sexo", "ciudad"],
+        extra_anomalies={
+            "sexo_invalid": sexo_invalid,
+            "email_invalid": email_invalid,
+            "telefono_invalid": telefono_invalid,
+        },
+    )
 
 
 def profile_citas_medicas(df: pd.DataFrame) -> dict[str, Any]:
-    expected_cols = expected_columns_citas_medicas()
-    pk_col = pk_column_citas()
-    out: dict[str, Any] = {"table": "citas_medicas"}
-    out["row_count"] = int(len(df))
-
-    missing_counts = {c: int(df[c].isna().sum()) for c in expected_cols if c in df.columns}
-    out["missing_counts"] = missing_counts
-
-    dedup_df = df.drop(columns=["source_row_id"], errors="ignore")
-    out["duplicate_counts"] = {
-        "exact_duplicate_rows": int(dedup_df.duplicated().sum()),
-        "pk_duplicate_rows": int(df[pk_col].duplicated().sum()) if pk_col in df.columns else 0,
-    }
-
-    fecha_stats = (
-        _date_anomaly_stats(df["fecha_cita"])
-        if "fecha_cita" in df.columns
-        else {"invalid_raw": 0, "recovered_by_swap": 0, "final_null": 0}
-    )
-
     estado_valid = 0
     if "estado_cita" in df.columns:
-        estado_lower = df["estado_cita"].dropna().astype(str).str.strip().str.lower()
-        estado_valid = int(estado_lower.isin(CATALOG_ESTADO_CITA.keys()).sum())
+        estado_valid = int(
+            df["estado_cita"].dropna().astype(str).str.strip().str.lower().isin(CATALOG_ESTADO_CITA.keys()).sum()
+        )
     estado_invalid = int(df["estado_cita"].notna().sum() - estado_valid) if "estado_cita" in df.columns else 0
 
     costo_non_numeric = 0
@@ -159,24 +150,20 @@ def profile_citas_medicas(df: pd.DataFrame) -> dict[str, Any]:
         costo_non_numeric = int(costo_cast.isna().sum())
         costo_negative = int((costo_cast.dropna() < 0).sum())
 
-    out["format_anomalies"] = {
-        "fecha_cita_invalid_raw": fecha_stats["invalid_raw"],
-        "fecha_cita_recovered_by_swap": fecha_stats["recovered_by_swap"],
-        "fecha_cita_final_null": fecha_stats["final_null"],
-        "estado_cita_invalid": estado_invalid,
-        "costo_non_numeric": int(costo_non_numeric),
-        "costo_negative": int(costo_negative),
-    }
-
-    card: dict[str, Any] = {}
-    for col in ["estado_cita", "especialidad", "medico"]:
-        if col in df.columns:
-            card[col] = {
-                "unique_count": int(df[col].nunique(dropna=True)),
-                "top": _top_categories(df[col], limit=5),
-            }
-    out["categorical_cardinality"] = card
-    return out
+    return _profile_table(
+        df,
+        table="citas_medicas",
+        expected_cols=EXPECTED_COLUMNS_CITAS_MEDICAS,
+        pk_col=PK_CITAS,
+        date_col="fecha_cita",
+        date_key_prefix="fecha_cita",
+        categorical_cols=["estado_cita", "especialidad", "medico"],
+        extra_anomalies={
+            "estado_cita_invalid": estado_invalid,
+            "costo_non_numeric": int(costo_non_numeric),
+            "costo_negative": int(costo_negative),
+        },
+    )
 
 
 def profile_dataset(df_dict: dict[str, pd.DataFrame]) -> dict[str, Any]:

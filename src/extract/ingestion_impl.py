@@ -9,7 +9,7 @@ from typing import Any
 
 import pandas as pd
 
-from src.core.schemas import required_columns_for_minimal_schema
+from src.core.schemas import REQUIRED_COLUMNS_MINIMAL_SCHEMA
 from src.core.utils import try_cast_int
 
 logger = logging.getLogger(__name__)
@@ -26,8 +26,7 @@ def _to_dataframe(rows: list[dict[str, Any]], *, table_name: str) -> pd.DataFram
 
 
 def validate_minimal_schema(df_dict: dict[str, pd.DataFrame]) -> None:
-    required = required_columns_for_minimal_schema()
-    for table_name, cols in required.items():
+    for table_name, cols in REQUIRED_COLUMNS_MINIMAL_SCHEMA.items():
         if table_name not in df_dict:
             raise ValueError(f"Missing table '{table_name}' in input dataset.")
         missing = [c for c in cols if c not in df_dict[table_name].columns]

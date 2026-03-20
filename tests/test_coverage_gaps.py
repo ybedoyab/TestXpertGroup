@@ -125,24 +125,6 @@ def test_compute_age_none_birth_date() -> None:
     assert compute_age(date(2026, 1, 1), None) is None
 
 
-def test_coalesce_str_none() -> None:
-    from src.core.utils import coalesce_str
-
-    assert coalesce_str(None) is None
-
-
-def test_coalesce_str_empty_string() -> None:
-    from src.core.utils import coalesce_str
-
-    assert coalesce_str("   ") is None
-
-
-def test_coalesce_str_value() -> None:
-    from src.core.utils import coalesce_str
-
-    assert coalesce_str("hello") == "hello"
-
-
 def test_try_cast_float_none() -> None:
     from src.core.utils import try_cast_float
 

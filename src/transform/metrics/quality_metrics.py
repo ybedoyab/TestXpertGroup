@@ -8,10 +8,26 @@ import numpy as np
 import pandas as pd
 
 from config.settings import Settings
-from src.core.schemas import expected_columns_citas_medicas, expected_columns_pacientes
+from src.core.schemas import EXPECTED_COLUMNS_CITAS_MEDICAS, EXPECTED_COLUMNS_PACIENTES
 from src.transform.metrics.base import flatten_metrics
 from src.transform.metrics.citas_metrics import compute_metrics_for_citas
 from src.transform.metrics.pacientes_metrics import compute_metrics_for_pacientes
+
+
+def _global_completeness(
+    df_p: pd.DataFrame, df_c: pd.DataFrame, exp_p: list[str], exp_c: list[str]
+) -> float:
+    total_cells = 0
+    non_null_cells = 0
+    for col in exp_p:
+        if col in df_p.columns:
+            total_cells += len(df_p)
+            non_null_cells += int(df_p[col].notna().sum())
+    for col in exp_c:
+        if col in df_c.columns:
+            total_cells += len(df_c)
+            non_null_cells += int(df_c[col].notna().sum())
+    return non_null_cells / total_cells if total_cells else float("nan")
 
 
 def compute_quality_metrics(
@@ -35,20 +51,9 @@ def compute_quality_metrics(
     )
     before_dataset_metrics = {"pacientes": metrics_p_before, "citas_medicas": metrics_c_before}
 
-    exp_p = expected_columns_pacientes()
-    exp_c = expected_columns_citas_medicas()
-    total_cells = 0
-    non_null_cells = 0
-    for col in exp_p:
-        if col in pacientes_before.columns:
-            total_cells += len(pacientes_before)
-            non_null_cells += int(pacientes_before[col].notna().sum())
-    for col in exp_c:
-        if col in citas_before.columns:
-            total_cells += len(citas_before)
-            non_null_cells += int(citas_before[col].notna().sum())
-
-    completeness_global_before = non_null_cells / total_cells if total_cells else float("nan")
+    exp_p = EXPECTED_COLUMNS_PACIENTES
+    exp_c = EXPECTED_COLUMNS_CITAS_MEDICAS
+    completeness_global_before = _global_completeness(pacientes_before, citas_before, exp_p, exp_c)
     global_before = {
         "row_count_total": int(len(pacientes_before) + len(citas_before)),
         "completeness_global_pct": completeness_global_before,
@@ -71,18 +76,7 @@ def compute_quality_metrics(
     )
     after_dataset_metrics = {"pacientes": metrics_p_after, "citas_medicas": metrics_c_after}
 
-    total_cells = 0
-    non_null_cells = 0
-    for col in exp_p:
-        if col in pacientes_after.columns:
-            total_cells += len(pacientes_after)
-            non_null_cells += int(pacientes_after[col].notna().sum())
-    for col in exp_c:
-        if col in citas_after.columns:
-            total_cells += len(citas_after)
-            non_null_cells += int(citas_after[col].notna().sum())
-
-    completeness_global_after = non_null_cells / total_cells if total_cells else float("nan")
+    completeness_global_after = _global_completeness(pacientes_after, citas_after, exp_p, exp_c)
     global_after = {
         "row_count_total": int(len(pacientes_after) + len(citas_after)),
         "completeness_global_pct": completeness_global_after,
